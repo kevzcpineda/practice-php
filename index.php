@@ -36,7 +36,8 @@
             <td><?php echo $user["firstname"]?></td>
             <td><?php echo $user["lastname"]?></td>
             <td>
-                <button class="btn btn-success">edit</button>
+                <a href="edit.php?id=<?php echo $user['id']?>"><button class="btn btn-success">edit</button></a>
+                <!-- <button type="hidden" value="<?php echo $user['id']?>"></button> -->
                 <a href="delete.php?id=<?php echo $user['id']?>"><button class ="btn btn-danger">delete</button></a>
         
         </td>
