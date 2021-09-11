@@ -20,90 +20,125 @@
         // echo "</pre>";
 
     ?>
-    <!-- ---------------------add modal------------------- -->
+    <!-- ---------------------ADD MODAL------------------- -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">add</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form action="add.php" method="POST">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">add</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="add.php" method="POST">
+                
             
-        
-            
-            <label >firstname</label>
-            <input type="text" name="firstname"value="" ><br>
-            <label >lastname</label>
-            <input type="text" name="lastname" value=""><br>
-            <label >email</label>
-            <input type="email" name="email" value=""><br>
-            
+                
+                <label >Product</label>
+                <input type="text" name="product"value="" ><br>            
+                <label >Listing Price</label>
+                <input type="number" name="listing_price" value=""><br>
+                <label >Retail Price</label>
+                <input type="number" name="retail_price" value=""><br>
+                
 
-        
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" name="add"class="btn btn-primary">Save changes</button>
-            </form>
-        </div>
+            
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="add"class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Close</button>
+                
+                </form>
+            </div>
+            </div>
         </div>
     </div>
-    </div>
-     <!-- ---------------------delete modal------------------- -->
+    <!-- ---------------------DELETE MODAL------------------- -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action="delete.php" method="POST">
-        <div class="modal-body">
-            
-            <input type="hidden" name = "deleteId" id="deleteId"> 
-            <h3>are you sure you want to delete this</h3>    
-                 
-        </div>
-        <div class="modal-footer">
-            <button type="submit" name="deletedata"class="btn btn-primary">Yes</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-            
-            </form>
-        </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="delete.php" method="POST">
+            <div class="modal-body">
+                
+                <input type="hidden" name = "deleteId" id="deleteId"> 
+                <h3>are you sure you want to delete this</h3>    
+                    
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="deletedata"class="btn btn-primary">Yes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                
+                </form>
+            </div>
+            </div>
         </div>
     </div>
-    </div>
-    <!-- ---------------------edit modal------------------- -->
+    <!-- ---------------------EDIT MODAL------------------- -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">edit</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form action="edit.php" method="POST">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">edit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="edit.php" method="POST">
+                
             
-        
-            <input type="hidden" name = "editId" id="editId"> 
-            <label >firstname</label>
-            <input type="text" name="firstname" id="fname"><br>
-            <label >lastname</label>
-            <input type="text" name="lastname" id="lname"><br>
-            
-            
+                <input type="hidden" name = "editId" id="editId"> 
+                <label >Product</label>
+                <input type="text" name="product" id="product"><br>            
+                <label >Listing Price</label>
+                <input type="number" name="listing_price" id="listing_price"><br>
+                <label >Retail Price</label>
+                <input type="number" name="retail_price" id="retail_price"><br>
+                
+                
 
-        
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" name="edit"class="btn btn-primary">Save changes</button>
-            </form>
-        </div>
+            
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="edit"class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                
+                </form>
+            </div>
+            </div>
         </div>
     </div>
+    <!-- ---------------------ADD QUANTITY MODAL------------------- -->
+    <div class="modal fade" id="addQuantityModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">add quantity</h5>
+                
+            </div>
+            <div class="modal-body">
+                <form action="addquantity.php" method="POST">
+                
+                <input type="hidden" name = "quantityId" id="quantityId"> 
+                <input type="hidden" name = "product" id="product"> 
+                <input type="hidden" name = "lastname" id="lname"> 
+                <input type="hidden" name = "price" id="price"> 
+                <label >quantity</label>
+                <input type="number" name="quantity" id="quantity"><br>
+                
+                
+
+            
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="add_quan_btn"class="btn btn-primary">Add</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                
+                </form>
+            </div>
+            </div>
+        </div>
     </div>
     
   
@@ -112,9 +147,11 @@
         <table class="table">
     <thead>
         <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
+        <th scope="col">id</th>
+        <th scope="col">Product</th>        
+        <th scope="col">Listing Price</th>
+        <th scope="col">Retail Price</th>
+        <th scope="col">quantity</th>
         <th scope="col">Handle</th>
         </tr>
     </thead>
@@ -123,12 +160,15 @@
         foreach ($users as $user){?>
             <tr>
                 <td><?php echo $user["id"]?></td>
-                <td><?php echo $user["firstname"]?></td>
-                <td><?php echo $user["lastname"]?></td>
+                <td><?php echo $user["product"]?></td>                
+                <td><?php echo $user["listing_price"]?></td>
+                <td><?php echo $user["retail_price"]?></td>
+                <td><?php echo $user["stock"]?></td>
                 <td>                    
                     
                     <button type = "button"  class="btn btn-success edtitBtn">edit</button>
                     <button type = "button" class ="btn btn-danger deleteBtn" >delete</button>
+                    <button type = "button" class ="btn btn-primary addQuanBtn" >add quantity</button>
             
                 </td>
             </tr>
@@ -166,8 +206,27 @@
                     }).get();
 
                     $('#editId').val(data[0]);
-                    $('#fname').val(data[1]);
-                    $('#lname').val(data[2]);
+                    $('#product').val(data[1]);
+                    $('#listing_price').val(data[2]);
+                    $('#retail_price').val(data[3]);
+                    
+                    
+            });
+            // --------------add quantity------------
+            $('.addQuanBtn').on('click',function(){
+                
+                $('#addQuantityModal').modal('show');
+                    $tr = $(this).closest('tr');
+
+                    var data = $tr.children("td").map(function(){
+                        return $(this).text();
+                    }).get();
+
+                    $('#quantityId').val(data[0]);
+                    // $('#product').val(data[1]);
+                    // $('#listing_price').val(data[2]);
+                    // $('#retail_price').val(data[3]);
+                    // $('#quantity').val(data[4]);
                     
                     
             });

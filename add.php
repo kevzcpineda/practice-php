@@ -16,11 +16,11 @@
 
         if(isset($_POST['add'])){
 
-            $fname = $_POST['firstname'];
-            $lname = $_POST['lastname'];
-            $email = $_POST['email'];
+            $product = $_POST['product'];            
+            $listing_price = $_POST['listing_price'];
+            $retail_price = $_POST['retail_price'];
 
-            $add_user = "INSERT INTO `student`(`id`, `firstname`, `lastname`, `email`) VALUES (null,'$fname' ,'$lname','$email')";
+            $add_user = "INSERT INTO `student`(`id`, `product`, `listing_price`,`retail_price`) VALUES (null,'$product','$listing_price','$retail_price')";
             $prepareStatement = $con->prepare($add_user);
             $result = $prepareStatement->execute();
 
@@ -38,17 +38,7 @@
 
     
     ?>
-    <form method="POST">
-        <h1>add</h1>
-        <label >firstname</label>
-        <input type="text" name="firstname"><br>
-        <label >lastname</label>
-        <input type="text" name="lastname"><br>
-        <label >email</label>
-        <input type="email" name="email"><br>
-        <button type = "submit" name="add">add</button>
-
-    </form>
+  
     
 </body>
 </html>

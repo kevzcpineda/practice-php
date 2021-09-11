@@ -11,23 +11,26 @@
         include("connect.php");
             $id = $_POST['editId'];
 
-            $edit_user = "SELECT * FROM `student` WHERE id = '$id'";
-            $prepareStatement = $con->prepare($edit_user);
-            $result = $prepareStatement->execute();
-            $user = $prepareStatement->fetch();
+            // $edit_user = "SELECT * FROM `student` WHERE id = '$id'";
+            // $prepareStatement = $con->prepare($edit_user);
+            // $result = $prepareStatement->execute();
+            // $user = $prepareStatement->fetch();
 
         
 
         if(isset($_POST['edit'])){
-            $fname = $_POST['firstname'];
-            $lname = $_POST['lastname'];
-            $email = $_POST['email'];
-            $id = $_POST['editId'];
+            
+            $product = $_POST['product'];            
+            $listing_price = $_POST['listing_price'];
+            $retail_price = $_POST['retail_price'];
+            
 
             
 
-            $edit_user = "UPDATE `student` SET `firstname`='$fname',`lastname`='$lname',`email`='$email' WHERE id= $id";
-            $prepareStatement = $con->prepare($edit_user);
+            $sql = "UPDATE `student` SET 
+            `product`='$product',
+            `listing_price`='$listing_price',`retail_price`='$retail_price' WHERE id= $id";
+            $prepareStatement = $con->prepare($sql);
             $result = $prepareStatement->execute();
             
 
