@@ -143,38 +143,40 @@
     
   
     <button type = "button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">add</button>
-    
-        <table class="table">
-    <thead>
-        <tr>
-        <th scope="col">id</th>
-        <th scope="col">Product</th>        
-        <th scope="col">Listing Price</th>
-        <th scope="col">Retail Price</th>
-        <th scope="col">quantity</th>
-        <th scope="col">Handle</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php 
-        foreach ($users as $user){?>
+
+    <a href="sales.php"><button type = "button" class="btn btn-success" >sales</button></a>
+
+    <table class="table">
+        <thead>
             <tr>
-                <td><?php echo $user["id"]?></td>
-                <td><?php echo $user["product"]?></td>                
-                <td><?php echo $user["listing_price"]?></td>
-                <td><?php echo $user["retail_price"]?></td>
-                <td><?php echo $user["stock"]?></td>
-                <td>                    
-                    
-                    <button type = "button"  class="btn btn-success edtitBtn">edit</button>
-                    <button type = "button" class ="btn btn-danger deleteBtn" >delete</button>
-                    <button type = "button" class ="btn btn-primary addQuanBtn" >add quantity</button>
-            
-                </td>
+            <th scope="col">id</th>
+            <th scope="col">Product</th>        
+            <th scope="col">Listing Price</th>
+            <th scope="col">Retail Price</th>
+            <th scope="col">quantity</th>
+            <th scope="col">Handle</th>
             </tr>
-        
-        <?php }?>
-    </tbody>
+        </thead>
+        <tbody>
+            <?php 
+            foreach ($users as $user){?>
+                <tr>
+                    <td><?php echo $user["id"]?></td>
+                    <td><?php echo $user["product"]?></td>                
+                    <td><?php echo $user["listing_price"]?></td>
+                    <td><?php echo $user["retail_price"]?></td>
+                    <td><?php echo $user["stock"]?></td>
+                    <td>                    
+                        
+                        <button type = "button"  class="btn btn-success edtitBtn">edit</button>
+                        <button type = "button" class ="btn btn-danger deleteBtn" >delete</button>
+                        <button type = "button" class ="btn btn-primary addQuanBtn" >add quantity</button>
+                
+                    </td>
+                </tr>
+            
+            <?php }?>
+        </tbody>
     </table>
 
     <!-- JavaScript Bundle with Popper -->
