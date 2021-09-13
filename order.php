@@ -1,3 +1,4 @@
+
 <?php 
     include("connect.php");
     $product = $_POST['product'];  
@@ -13,23 +14,39 @@
     $quantity = $_POST['quantity'];
     $total = $quantity * $price;
     $date = date('Y-m-d');
+    $stock = $users['stock'];
+    $sub = $stock - $quantity;
 
     if(isset($_POST['order'])){
-            echo "<pre>";
-            print_r($date);
-            echo "</pre>";
+            
             
 
-            $add_record = "INSERT INTO `sale_record`(`id`, `product_name`, `price`,`quantity`,`total`,`date`) VALUES (null,'$product','$price','$quantity','$total','$date')";
-            $prepareStatement = $con->prepare($add_record);
-            $result = $prepareStatement->execute();
+            echo "<pre>";            
+            print_r($users['stock']);            
+            echo "</pre>";
+            if($quantity>$stock){
+                
+            header("Location: sales.php?error=highQuantity" );
+            exit();
+                
+            }else{
+                $update_product = "UPDATE `student` SET `stock` = '$sub' WHERE product='$product'";
+                $prepareStatement = $con->prepare($update_product);
+                $result = $prepareStatement->execute();
+            
 
-            $stock = $quantity - $users['stock'];
-            $update_product = "UPDATE `student` SET `stock` = '$stock' WHERE product='$product'";
-            $prepareStatement = $con->prepare($update_product);
-            $result = $prepareStatement->execute();
+                $add_record = "INSERT INTO `sale_record`(`id`, `product_name`, `price`,`quantity`,`total`,`date`) VALUES (null,'$product','$price','$quantity','$total','$date')";
+                $prepareStatement = $con->prepare($add_record);
+                $results = $prepareStatement->execute();
+            }
+       
+           
 
-            if($result){
+
+            
+           
+
+            if($results){
                 header("Location: index.php" );
             }
             else{

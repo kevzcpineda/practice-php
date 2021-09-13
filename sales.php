@@ -16,11 +16,12 @@
         $result = $prepareStatement->execute();
         $sale_records = $prepareStatement->fetchAll();
 
-        $student = "SELECT * FROM student";
+        $student = "SELECT * FROM student WHERE stock>0";
         $prepareStatement = $con->prepare($student);
         $result = $prepareStatement->execute();
         $students = $prepareStatement->fetchAll();
 
+        $a;
         // echo "<pre>";
         // print_r($users);
         // echo "</pre>";
@@ -38,14 +39,21 @@
                 <form action="order.php" method="POST">
                     
                     <label>Product</label>
-                    <select id="" name="product">
+                    <select id="product" name="product">
+                        
                     <?php 
+                    
                     foreach ($students as $student){?>
-                    <option name=""><?php echo $student['product']?></option>
+                    
+                    <option value="<?php echo $student['product']?>"> <?php echo $student['product']?> </option>
+
+
                     <?php }?>
                     </select>
                     <label>quantity</label>
                     <input type="number" name="quantity" id="quantity"><br>
+                    <label>avalable quantity:</label>
+                    <label id="avalable"></label>
             </div>
             <div class="modal-footer">
                 <button type="submit" name="order"class="btn btn-primary">Order</button>
@@ -56,8 +64,10 @@
             </div>
         </div>
     </div>
-
+    
     <button type = "button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#orderModal">order</button>
+   
+    
     <table class="table">
         <thead>
             <tr>
@@ -75,9 +85,9 @@
                 <tr>
                     <td><?php echo $sale_record["id"]?></td>
                     <td><?php echo $sale_record["product_name"]?></td>                
-                    <td><?php echo $sale_record["price"]?></td>
+                    <td>₱ <?php echo $sale_record["price"]?></td>
                     <td><?php echo $sale_record["quantity"]?></td>
-                    <td><?php echo $sale_record["total"]?></td>
+                    <td>₱ <?php echo $sale_record["total"]?></td>
                     <td><?php echo $sale_record["date"]?></td>
                     
                 </tr>
@@ -90,5 +100,34 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $('#product').change(function(){
+                var product = $('#product').val();
+                console.log(product);
+
+                $.ajax({
+                url:"show_available.php",
+                method:"POST",
+                data:{
+                    id:product,
+                },
+                success:function(data){
+                    $('#avalable').html(data);
+                }
+                    
+
+            });
+            });
+            
+            // var data ={
+            //     id:"product",
+            //     as:"asdasdda",
+            // }
+            // console.log(data['as']);
+            
+            
+        });
+    </script>
 </body>
 </html>
