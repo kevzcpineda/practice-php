@@ -10,7 +10,7 @@
 <body>
     <?php
         include("connect.php");
-        $selectUsers = "SELECT * FROM student";
+        $selectUsers = "SELECT * FROM student ORDER BY id DESC";
         $prepareStatement = $con->prepare($selectUsers);
         $result = $prepareStatement->execute();
         $users = $prepareStatement->fetchAll();
@@ -29,22 +29,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="add.php" method="POST">
+                <form action="add.php" method="POST" id="addform">
                 
             
                 
                 <label >Product</label>
-                <input type="text" name="product"value="" ><br>            
+                <input type="text" name="product"value="" id="product"><br>            
                 <label >Listing Price</label>
-                <input type="number" name="listing_price" value=""><br>
+                <input type="text" name="listing_price" value=""id="listing_price"><br>
                 <label >Retail Price</label>
-                <input type="number" name="retail_price" value=""><br>
+                <input type="text" name="retail_price" value=""id="retail_price"><br>
+                <label >Quantity</label>
+                <input type="number" name="quantity" value=""id="quantity"><br>
                 
 
             
             </div>
             <div class="modal-footer">
-                <button type="submit" name="add"class="btn btn-primary">Save changes</button>
+                <button type="submit" name="add"class="btn btn-primary" id="submit">Save changes</button>
                 <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Close</button>
                 
                 </form>
@@ -141,7 +143,9 @@
         </div>
     </div>
     
-  
+    <div id="alert" class="alert alert-primary" role="alert">
+        
+    </div>
     <button type = "button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">add</button>
 
     <a href="sales.php"><button type = "button" class="btn btn-success" >sales</button></a>
@@ -163,8 +167,8 @@
                 <tr>
                     <td><?php echo $user["id"]?></td>
                     <td><?php echo $user["product"]?></td>                
-                    <td><?php echo $user["listing_price"]?></td>
-                    <td><?php echo $user["retail_price"]?></td>
+                    <td><?php echo number_format($user["listing_price"],2)?></td>
+                    <td><?php echo number_format($user["retail_price"],2)?></td>
                     <td><?php echo $user["stock"]?></td>
                     <td>                    
                         
@@ -232,6 +236,23 @@
                     
                     
             });
+
+            // ---------------alert-------------------
+            // $('#addform').submit(function(event){               
+               
+            //     var product = $('#product').val();
+            //     var listing_price = $('#listing_price').val();
+            //     var retail_price = $('#retail_price').val();
+            //     var quantity = $('#quantity').val();
+            //     var submit = $('#submit').val();
+            //     if(empty(product)){
+            //         console.log("fill in all fields");   
+            //         event.preventDefault();
+
+            //     }
+               
+            // });
+
         });
     </script>
 </body>

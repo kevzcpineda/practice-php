@@ -10,4 +10,4 @@
 
 ?>
 
-<span><?php echo $students['stock']?></span>
+<span><?php echo number_format($students['stock'])?></span>

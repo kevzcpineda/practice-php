@@ -21,7 +21,12 @@
         $result = $prepareStatement->execute();
         $students = $prepareStatement->fetchAll();
 
-        $a;
+        $total_sales=0;
+        foreach($sale_records as $sale_record){
+            
+            $total_sales = $total_sales+$sale_record['total'];
+        }
+        
         // echo "<pre>";
         // print_r($users);
         // echo "</pre>";
@@ -40,7 +45,7 @@
                     
                     <label>Product</label>
                     <select id="product" name="product">
-                        
+                    <option value="">select product</option>
                     <?php 
                     
                     foreach ($students as $student){?>
@@ -64,7 +69,7 @@
             </div>
         </div>
     </div>
-    
+    <h3 id="total-sale">total:<?php echo number_format($total_sales)?></h3>
     <button type = "button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#orderModal">order</button>
    
     
@@ -85,9 +90,9 @@
                 <tr>
                     <td><?php echo $sale_record["id"]?></td>
                     <td><?php echo $sale_record["product_name"]?></td>                
-                    <td>₱ <?php echo $sale_record["price"]?></td>
-                    <td><?php echo $sale_record["quantity"]?></td>
-                    <td>₱ <?php echo $sale_record["total"]?></td>
+                    <td>₱ <?php echo number_format($sale_record["price"])?></td>
+                    <td><?php echo number_format($sale_record["quantity"])?></td>
+                    <td>₱ <?php echo number_format($sale_record["total"])?></td>
                     <td><?php echo $sale_record["date"]?></td>
                     
                 </tr>
@@ -117,14 +122,10 @@
                 }
                     
 
-            });
+                });
             });
             
-            // var data ={
-            //     id:"product",
-            //     as:"asdasdda",
-            // }
-            // console.log(data['as']);
+            
             
             
         });

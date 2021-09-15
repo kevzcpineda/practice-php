@@ -1,44 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add</title>
-</head>
-<body>
-    <?php
-        include("connect.php");
 
-        echo "<pre><br>";
-        print_r($result);
-        echo "</pre>";
+<?php
+    include("connect.php");
 
-        if(isset($_POST['add'])){
+    // echo "<pre><br>";
+    // print_r($result);
+    // echo "</pre>";
 
-            $product = $_POST['product'];            
-            $listing_price = $_POST['listing_price'];
-            $retail_price = $_POST['retail_price'];
+    if(isset($_POST['add'])){
 
-            $add_user = "INSERT INTO `student`(`id`, `product`, `listing_price`,`retail_price`) VALUES (null,'$product','$listing_price','$retail_price')";
-            $prepareStatement = $con->prepare($add_user);
-            $result = $prepareStatement->execute();
+        $product = $_POST['product'];            
+        $listing_price = floatval($_POST['listing_price']);
+        $retail_price = floatval($_POST['retail_price']);
+        $quantity = $_POST['quantity'];
 
-            if($result){
-                header("Location: index.php" );
-            }
-            else{
-                echo "Failed to save";
-            }
+        $add_user = "INSERT INTO `student`(`id`, `product`, `listing_price`,`retail_price`,`stock`) VALUES (null,'$product','$listing_price','$retail_price','$quantity')";
+        $prepareStatement = $con->prepare($add_user);
+        $result = $prepareStatement->execute();
 
-
-
-        }
         
+        if($result){
+        header("Location: index.php" );
+        }
+        else{
+            echo "Failed to save";
+        }
 
+
+    }
     
-    ?>
-  
-    
-</body>
-</html>
+
+
+?>
+
+
