@@ -1,0 +1,44 @@
+.bar {
+    display: flex;
+    align-items: center;
+    background-color: #12192C;
+    height: 80px;
+    margin-bottom: 30px;
+}
+
+.container {
+    max-width: 80%;
+}
+
+.top div {
+    height: 110px;
+    width: 20%;
+    border: 1px solid red;
+    border-radius: 15px;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.nav .nav-item:first-child a {
+    padding-left: 0;
+}
+
+.chart {
+    margin-top: 20px;
+    max-width: 50%;
+    /* height: 300px; */
+}
+
+.endingInventory {
+    display: flex;
+}

@@ -9,9 +9,10 @@
     $users = $prepareStatement->fetch();
 
     
-    
+    $listing_price = $users['listing_price'];
     $price = $users['retail_price'];
     $quantity = $_POST['quantity'];
+    $total_listing_price = $quantity * $listing_price;
     $total = $quantity * $price;
     $date = date('Y-m-d');
     $stock = $users['stock'];
@@ -35,16 +36,10 @@
                 $result = $prepareStatement->execute();
             
 
-                $add_record = "INSERT INTO `sale_record`(`id`, `product_name`, `price`,`quantity`,`total`,`date`) VALUES (null,'$product','$price','$quantity','$total','$date')";
+                $add_record = "INSERT INTO `sale_record`(`id`, `product_name`, `price`,`quantity`,`total_listing_price`,`total`,`date`) VALUES (null,'$product','$price','$quantity','$total_listing_price','$total','$date')";
                 $prepareStatement = $con->prepare($add_record);
                 $results = $prepareStatement->execute();
             }
-       
-           
-
-
-            
-           
 
             if($results){
                 header("Location: index.php" );

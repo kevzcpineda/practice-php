@@ -9,7 +9,7 @@
 <body> -->
     <?php
         include("connect.php");
-            $id = $_POST['editId'];
+            
 
             // $edit_user = "SELECT * FROM `student` WHERE id = '$id'";
             // $prepareStatement = $con->prepare($edit_user);
@@ -19,8 +19,10 @@
         
 
         if(isset($_POST['edit'])){
-            
+            $id = $_POST['editId'];
             $product = $_POST['product'];            
+            $category = $_POST['category'];            
+            $brand = $_POST['brand'];            
             $listing_price = $_POST['listing_price'];
             $retail_price = $_POST['retail_price'];
             
@@ -29,7 +31,10 @@
 
             $sql = "UPDATE `student` SET 
             `product`='$product',
-            `listing_price`='$listing_price',`retail_price`='$retail_price' WHERE id= $id";
+            `category`='$category',
+            `brand`='$brand',
+            `listing_price`='$listing_price',
+            `retail_price`='$retail_price' WHERE id= $id";
             $prepareStatement = $con->prepare($sql);
             $result = $prepareStatement->execute();
             
@@ -39,7 +44,7 @@
             echo "</pre>";
 
             if($result){
-                header("Location: index.php" );
+                header("location: product.php");
             }
             else{
                 echo "Failed to save";

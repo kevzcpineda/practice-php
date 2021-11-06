@@ -9,8 +9,7 @@
         $result = $prepareStatement->execute();
 
         if($result){
-            echo "<script> alert('deleted'); </script>";
-            header("location: index.php");
+            header("location: product.php");
         }
     }
    

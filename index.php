@@ -2,258 +2,248 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
-    <script src="jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="jquery-year-picker/css/yearpicker.css" />
+    <link rel="stylesheet" href="style.css">
+    <!-- <link href="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+    <title>Dashboard</title>
 </head>
+<?php
+    $page = "index";
+?>
 <body>
-    <?php
-        include("connect.php");
-        $selectUsers = "SELECT * FROM student ORDER BY id DESC";
-        $prepareStatement = $con->prepare($selectUsers);
-        $result = $prepareStatement->execute();
-        $users = $prepareStatement->fetchAll();
+    <?php include("navbar.php");?>
 
-        // echo "<pre>";
-        // print_r($users);
-        // echo "</pre>";
-
-    ?>
-    <!-- ---------------------ADD MODAL------------------- -->
-    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">add</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="add.php" method="POST" id="addform">
-                
-            
-                
-                <label >Product</label>
-                <input type="text" name="product"value="" id="product"><br>            
-                <label >Listing Price</label>
-                <input type="text" name="listing_price" value=""id="listing_price"><br>
-                <label >Retail Price</label>
-                <input type="text" name="retail_price" value=""id="retail_price"><br>
-                <label >Quantity</label>
-                <input type="number" name="quantity" value=""id="quantity"><br>
-                
-
-            
-            </div>
-            <div class="modal-footer">
-                <button type="submit" name="add"class="btn btn-primary" id="submit">Save changes</button>
-                <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Close</button>
-                
-                </form>
-            </div>
-            </div>
+    <div class="container">
+        <div class="header">
+            <h3>Dashboard</h3>
         </div>
-    </div>
-    <!-- ---------------------DELETE MODAL------------------- -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="delete.php" method="POST">
-            <div class="modal-body">
-                
-                <input type="hidden" name = "deleteId" id="deleteId"> 
-                <h3>are you sure you want to delete this</h3>    
-                    
-            </div>
-            <div class="modal-footer">
-                <button type="submit" name="deletedata"class="btn btn-primary">Yes</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                
-                </form>
-            </div>
-            </div>
+        <div class="top">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-    </div>
-    <!-- ---------------------EDIT MODAL------------------- -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">edit</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="edit.php" method="POST">
-                
-            
-                <input type="hidden" name = "editId" id="editId"> 
-                <label >Product</label>
-                <input type="text" name="product" id="product"><br>            
-                <label >Listing Price</label>
-                <input type="number" name="listing_price" id="listing_price"><br>
-                <label >Retail Price</label>
-                <input type="number" name="retail_price" id="retail_price"><br>
-                
-                
-
-            
-            </div>
-            <div class="modal-footer">
-                <button type="submit" name="edit"class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                
-                </form>
-            </div>
-            </div>
+        <h1 id="kev"></h1>
+        <div class="endingInventory" >
+            <!-- <input type="text" class="form-control" name="datepicker" id="datepicker"/> -->
+            <button class="btn btn-success" id="endingInventory">Get ending inventory</button>
         </div>
-    </div>
-    <!-- ---------------------ADD QUANTITY MODAL------------------- -->
-    <div class="modal fade" id="addQuantityModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">add quantity</h5>
-                
-            </div>
-            <div class="modal-body">
-                <form action="addquantity.php" method="POST">
-                
-                <input type="hidden" name = "quantityId" id="quantityId"> 
-                <input type="hidden" name = "product" id="product"> 
-                <input type="hidden" name = "lastname" id="lname"> 
-                <input type="hidden" name = "price" id="price"> 
-                <label >quantity</label>
-                <input type="number" name="quantity" id="quantity"><br>
-                
-                
-
-            
-            </div>
-            <div class="modal-footer">
-                <button type="submit" name="add_quan_btn"class="btn btn-primary">Add</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                
-                </form>
-            </div>
-            </div>
+        <div class="chart">
+            <input type="text" class="yearpicker form-control" id="picker"/>
+            <canvas id="myChart"></canvas>
         </div>
+
     </div>
-    
-    <div id="alert" class="alert alert-primary" role="alert">
-        
-    </div>
-    <button type = "button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">add</button>
-
-    <a href="sales.php"><button type = "button" class="btn btn-success" >sales</button></a>
-
-    <table class="table">
-        <thead>
-            <tr>
-            <th scope="col">id</th>
-            <th scope="col">Product</th>        
-            <th scope="col">Listing Price</th>
-            <th scope="col">Retail Price</th>
-            <th scope="col">quantity</th>
-            <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-            foreach ($users as $user){?>
-                <tr>
-                    <td><?php echo $user["id"]?></td>
-                    <td><?php echo $user["product"]?></td>                
-                    <td><?php echo number_format($user["listing_price"],2)?></td>
-                    <td><?php echo number_format($user["retail_price"],2)?></td>
-                    <td><?php echo $user["stock"]?></td>
-                    <td>                    
-                        
-                        <button type = "button"  class="btn btn-success edtitBtn">edit</button>
-                        <button type = "button" class ="btn btn-danger deleteBtn" >delete</button>
-                        <button type = "button" class ="btn btn-primary addQuanBtn" >add quantity</button>
-                
-                    </td>
-                </tr>
-            
-            <?php }?>
-        </tbody>
-    </table>
-
+   
+    <!-- ===== IONICONS ===== -->
+    <!-- <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script> -->
+    <!-- ===== MAIN JS ===== -->
+    <!-- <script src="assets/js/main.js"></script> -->
     <!-- JavaScript Bundle with Popper -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" -->
+        <!-- integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="jquery-year-picker/js/core.js"></script> -->
+    <script src="jquery-year-picker/js/yearpicker.js"></script>
+    <!-- <script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script> -->
 
     <script>
         $(document).ready(function(){
-            // -----------delete btn-----------
-            $('.deleteBtn').on('click',function(){
-                
-                $('#deleteModal').modal('show');
-                    $tr = $(this).closest('tr');
-                    var data = $tr.children("td").map(function(){
-                        return $(this).text();
-                    }).get();
-                    $('#deleteId').val(data[0]);
+            const d = new Date();
+            let year_now = d.getFullYear();
+            $("#endingInventory").click(function(){
+                $.ajax({
+                    method:"POST",
+                    url:"ending_inventory.php",
+                    success: function(res){
+                        console.log(res);
+                    }
+                });
             });
-
-            // ---------------edit btn--------------
-            $('.edtitBtn').on('click',function(){
-                
-                $('#editModal').modal('show');
-                    $tr = $(this).closest('tr');
-
-                    var data = $tr.children("td").map(function(){
-                        return $(this).text();
-                    }).get();
-
-                    $('#editId').val(data[0]);
-                    $('#product').val(data[1]);
-                    $('#listing_price').val(data[2]);
-                    $('#retail_price').val(data[3]);
-                    
-                    
+            
+            $.ajax({
+                type:"POST",
+                url:"show_revenue.php",
+                data:{year_now:year_now},
+                dataType:"JSON",
+                success: function(res){
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    const myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                            datasets: [{
+                                label: '# of Votes',
+                                data: [res.october_capital, res.october_sold, res.october_revenue, res.october_capital, res.october_sold, res.october_revenue],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                }
             });
-            // --------------add quantity------------
-            $('.addQuanBtn').on('click',function(){
-                
-                $('#addQuantityModal').modal('show');
-                    $tr = $(this).closest('tr');
-
-                    var data = $tr.children("td").map(function(){
-                        return $(this).text();
-                    }).get();
-
-                    $('#quantityId').val(data[0]);
-                    // $('#product').val(data[1]);
-                    // $('#listing_price').val(data[2]);
-                    // $('#retail_price').val(data[3]);
-                    // $('#quantity').val(data[4]);
-                    
-                    
-            });
-
-            // ---------------alert-------------------
-            // $('#addform').submit(function(event){               
-               
-            //     var product = $('#product').val();
-            //     var listing_price = $('#listing_price').val();
-            //     var retail_price = $('#retail_price').val();
-            //     var quantity = $('#quantity').val();
-            //     var submit = $('#submit').val();
-            //     if(empty(product)){
-            //         console.log("fill in all fields");   
-            //         event.preventDefault();
-
-            //     }
-               
+            // $.ajax({
+            // type:"POST",
+            // url:"show_revenue.php",
+            // data:{year_now:year_now},
+            // dataType:"JSON",
+            // success: function(res){
+            //     const labels = [
+            //         'January',
+            //         'February',
+            //         'March',
+            //         'April',
+            //         'May',
+            //         'June',
+            //         'July',
+            //         'August',
+            //         'September',
+            //         'October',
+            //         'November',
+            //         'December'
+            //     ];
+            //     const data = {
+            //         labels: labels,
+            //         datasets: [{
+            //             label: 'Product purchased',
+            //             backgroundColor: 'rgb(255, 99, 132)',
+            //             borderColor: 'rgb(255, 99, 132)',
+            //             data: [
+            //                 res.january_capital,
+            //                 res.feb_capital,
+            //                 res.march_capital,
+            //                 res.april_capital,
+            //                 res.may_capital,
+            //                 res.june_capital,
+            //                 res.july_capital,
+            //                 res.august_capital,
+            //                 res.september_capital,
+            //                 res.october_capital,
+            //                 res.november_capital,
+            //                 res.december_capital,
+            //                 ]
+            //         },{
+            //             label: 'Sales',
+            //             backgroundColor: 'rgb(255, 99, 132)',
+            //             borderColor: 'rgb(255, 99, 132)',
+            //             data: [
+            //                 res.january_sold,
+            //                 res.feb_sold,
+            //                 res.march_sold,
+            //                 res.april_sold,
+            //                 res.may_sold,
+            //                 res.june_sold,
+            //                 res.july_sold,
+            //                 res.agust_sold,
+            //                 res.september_sold,
+            //                 res.october_sold,
+            //                 res.november_sold,
+            //                 res.december_sold,
+            //                 ]
+            //         },{
+            //             label: 'Ending inventory',
+            //             backgroundColor: 'rgb(255, 99, 132)',
+            //             borderColor: 'rgb(255, 99, 132)',
+            //             data: [
+            //                 res.january_ending_inventory,
+            //                 res.feb_ending_inventory,
+            //                 res.march_ending_inventory,
+            //                 res.april_ending_inventory,
+            //                 res.may_ending_inventory,
+            //                 res.june_ending_inventory,
+            //                 res.july_ending_inventory,
+            //                 res.august_ending_inventory,
+            //                 res.september_ending_inventory,
+            //                 res.october_ending_inventory,
+            //                 res.november_ending_inventory,
+            //                 res.december_ending_inventory
+            //                 ]
+            //         },{
+            //             label: 'Profit',
+            //             backgroundColor: 'rgb(255, 99, 132)',
+            //             borderColor: 'rgb(255, 99, 132)',
+            //             data: [
+            //                 res.january_revenue,
+            //                 res.feb_revenue,
+            //                 res.march_revenue,
+            //                 res.april_revenue,
+            //                 res.may_revenue,
+            //                 res.june_revenue,
+            //                 res.july_revenue,
+            //                 res.august_revenue,
+            //                 res.september_revenue,
+            //                 res.october_revenue,
+            //                 res.november_revenue,
+            //                 res.december_revenue],
+            //         }]
+            //     };
+            //     const config = {
+            //         type: 'bar',
+            //         data: data,
+            //         options: {}
+            //     };
+            //     var myChart = new Chart(
+            //     document.getElementById('myChart'),
+            //     config
+            //     );
+            // }
             // });
-
+            $("#picker").yearpicker({
+                year : year_now,
+                onChange : function(value){
+                    $.ajax({
+                        type:"POST",
+                        url:"change_year.php",
+                        data:{value:value},
+                        dataType:"JSON",
+                        success: function(res){
+                            // myChart.data.datasets[0].data = [
+                            //     4,5,6,7,8,9
+                            // ];
+                            // myChart.update();
+                            console.log("skefsndjfn");
+                        }
+                    });
+                }
+            });
+            
+            
+            
         });
+        
+        
     </script>
 </body>
 </html>
