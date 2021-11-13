@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2021 at 06:03 AM
+-- Generation Time: Nov 13, 2021 at 07:07 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -43,9 +43,13 @@ CREATE TABLE `add_quantity` (
 --
 
 INSERT INTO `add_quantity` (`id`, `product`, `category`, `brand_name`, `quantity`, `total_listing_price`, `date`) VALUES
-(28, 'sample 1', 'category 1', 'brand 1', 4, '200.00', '2021-10-20'),
-(29, 'sample 2', 'category 2', 'brand 2', 4, '400.00', '2021-10-20'),
-(30, 'sample 2', 'category 2', 'brand 2', 1, '100.00', '2021-10-20');
+(31, 'sample 2', 'category 2', 'brand 2', 2, '100.00', '2021-10-28'),
+(32, 'sample 1', 'category 1', 'brand 1', 2, '40.00', '2021-10-28'),
+(33, 'sample 2', 'category 2', 'brand 2', 1, '50.00', '2021-10-28'),
+(34, 'sample 1', 'category 1', 'brand 1', 1, '20.00', '2021-10-28'),
+(35, 'sample 2', 'category 2', 'brand 2', 1, '50.00', '2021-10-31'),
+(36, 'sample 1', 'category 1', 'brand 1', 1, '20.00', '2021-10-31'),
+(37, 'sample 2', 'category 2', 'brand 2', 1, '50.00', '2021-11-01');
 
 -- --------------------------------------------------------
 
@@ -84,6 +88,53 @@ CREATE TABLE `category_table` (
 INSERT INTO `category_table` (`id`, `category`) VALUES
 (4, 'category 1'),
 (5, 'category 2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ending_inventory`
+--
+
+CREATE TABLE `ending_inventory` (
+  `id` int(255) NOT NULL,
+  `product_category` varchar(255) NOT NULL,
+  `ending_inventory` decimal(20,2) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ending_inventory`
+--
+
+INSERT INTO `ending_inventory` (`id`, `product_category`, `ending_inventory`, `date`) VALUES
+(1, 'category 1', '60.00', '2021-11-01'),
+(2, 'category 2', '100.00', '2021-11-01'),
+(3, 'category 1', '60.00', '2021-11-02'),
+(4, 'category 2', '100.00', '2021-11-02'),
+(5, 'category 1', '60.00', '2021-11-02'),
+(6, 'category 2', '100.00', '2021-11-02'),
+(7, 'category 1', '60.00', '2021-11-02'),
+(8, 'category 2', '100.00', '2021-11-02'),
+(9, 'category 1', '60.00', '2021-11-03'),
+(10, 'category 2', '100.00', '2021-11-03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_category`
+--
+
+CREATE TABLE `item_category` (
+  `id` int(11) NOT NULL,
+  `item_category` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `item_category`
+--
+
+INSERT INTO `item_category` (`id`, `item_category`) VALUES
+(2, '4 barss');
 
 -- --------------------------------------------------------
 
@@ -146,7 +197,10 @@ CREATE TABLE `order_table` (
 INSERT INTO `order_table` (`id`, `customer_name`, `total`, `date`) VALUES
 (16, 'jayz', '0.00', '2021-10-20'),
 (17, 'kevin', '0.00', '2021-10-20'),
-(18, 'test', '0.00', '2021-10-20');
+(18, 'test', '0.00', '2021-10-20'),
+(19, 'erika mae', '0.00', '2021-10-28'),
+(20, 'kevin', '0.00', '2021-10-28'),
+(21, 'kevin', '0.00', '2021-10-31');
 
 -- --------------------------------------------------------
 
@@ -172,15 +226,12 @@ CREATE TABLE `sale_record` (
 --
 
 INSERT INTO `sale_record` (`id`, `product_id`, `product_name`, `brand`, `category`, `price`, `quantity`, `total_listing_price`, `total`, `date`) VALUES
-(55, 16, 'sample 1', 'brand 1', 'category 1', '100.00', 1, '50.00', '100.00', '2021-10-20'),
-(56, 16, 'sample 2', 'brand 2', 'category 2', '200.00', 2, '100.00', '400.00', '2021-10-20'),
-(57, 17, 'sample 1', 'brand 1', 'category 1', '100.00', 2, '50.00', '200.00', '2021-10-20'),
-(58, 17, 'sample 2', 'brand 2', 'category 2', '200.00', 2, '100.00', '400.00', '2021-10-20'),
-(59, 18, 'sample 1', 'brand 1', 'category 1', '100.00', 1, '50.00', '100.00', '2021-10-20'),
-(60, 18, 'sample 2', 'brand 2', 'category 2', '200.00', 1, '100.00', '200.00', '2021-10-20'),
-(61, 0, '', '', '', '500.00', 3, '100.00', '300.00', '2021-01-13'),
-(62, 0, '', '', '', '500.00', 1, '100.00', '200.00', '2021-01-01'),
-(63, 0, '', '', '', '0.00', 0, '0.00', '500.00', '2021-02-28');
+(64, 19, 'sample 1', 'brand 1', 'category 1', '50.00', 1, '20.00', '50.00', '2021-10-28'),
+(65, 19, 'sample 2', 'brand 2', 'category 2', '100.00', 1, '50.00', '100.00', '2021-10-28'),
+(66, 20, 'sample 1', 'brand 1', 'category 1', '50.00', 1, '20.00', '50.00', '2021-10-28'),
+(67, 20, 'sample 2', 'brand 2', 'category 2', '100.00', 1, '50.00', '100.00', '2021-10-28'),
+(68, 21, 'sample 1', 'brand 1', 'category 1', '50.00', 1, '20.00', '50.00', '2021-10-31'),
+(69, 21, 'sample 2', 'brand 2', 'category 2', '100.00', 1, '50.00', '100.00', '2021-10-31');
 
 -- --------------------------------------------------------
 
@@ -203,8 +254,9 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `product`, `category`, `brand`, `listing_price`, `retail_price`, `stock`) VALUES
-(100, 'sample 1', 'category 1', 'brand 1', '6.00', '50.00', 0),
-(101, 'sample 2', 'category 2', 'brand 2', '3.00', '100.00', 0);
+(100, 'sample 1', 'category 1', 'brand 1', '20.00', '50.00', 1),
+(101, 'sample 2', 'category 2', 'brand 2', '50.00', '100.00', 2),
+(102, 'sample 3', 'category 1', 'brand 1', '20.00', '30.00', 2);
 
 --
 -- Indexes for dumped tables
@@ -226,6 +278,18 @@ ALTER TABLE `brand_table`
 -- Indexes for table `category_table`
 --
 ALTER TABLE `category_table`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ending_inventory`
+--
+ALTER TABLE `ending_inventory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `item_category`
+--
+ALTER TABLE `item_category`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -260,7 +324,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `add_quantity`
 --
 ALTER TABLE `add_quantity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `brand_table`
@@ -275,6 +339,18 @@ ALTER TABLE `category_table`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `ending_inventory`
+--
+ALTER TABLE `ending_inventory`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `item_category`
+--
+ALTER TABLE `item_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `loan`
 --
 ALTER TABLE `loan`
@@ -284,19 +360,19 @@ ALTER TABLE `loan`
 -- AUTO_INCREMENT for table `order_table`
 --
 ALTER TABLE `order_table`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `sale_record`
 --
 ALTER TABLE `sale_record`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
