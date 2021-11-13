@@ -15,7 +15,7 @@
     $category_result = $prepareStatement->execute();
     $categorys_records = $prepareStatement->fetchAll();
     
-    $year_now = $_POST['year_now'];
+    $year_now = $_POST['value'];
 
     $number_of_category = 0;
     $total_product = 0;

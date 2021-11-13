@@ -32,9 +32,30 @@
             <!-- <input type="text" class="form-control" name="datepicker" id="datepicker"/> -->
             <button class="btn btn-success" id="endingInventory">Get ending inventory</button>
         </div>
-        <div class="chart">
+        <div class="charts">
             <input type="text" class="yearpicker form-control" id="picker"/>
+            <!-- <select name="" id="select_year">
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+            </select> -->
             <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="schart">
+            <select name="" id="category">
+                <?php 
+                    include("mysqli.php");
+                    $catSql = "SELECT * FROM category_table";
+                    $cat = $con->query($catSql);
+    
+                    while($row = $cat->fetch_assoc()){
+                        echo '<option value="'.$row['category'].'">'.$row['category'].'</option>'; 
+                ?>
+                <?php } ?>
+            </select>
+            <canvas id="secondChart"></canvas>
         </div>
 
     </div>
@@ -59,61 +80,159 @@
 
     <script>
         $(document).ready(function(){
-            const d = new Date();
-            let year_now = d.getFullYear();
+            
+            // btn get ending inventory
             $("#endingInventory").click(function(){
                 $.ajax({
                     method:"POST",
                     url:"ending_inventory.php",
                     success: function(res){
-                        console.log(res);
+                        alert("success");
                     }
                 });
             });
-            
-            $.ajax({
-                type:"POST",
-                url:"show_revenue.php",
-                data:{year_now:year_now},
-                dataType:"JSON",
-                success: function(res){
-                    const ctx = document.getElementById('myChart').getContext('2d');
-                    const myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                            datasets: [{
-                                label: '# of Votes',
-                                data: [res.october_capital, res.october_sold, res.october_revenue, res.october_capital, res.october_sold, res.october_revenue],
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
+            //first graph
+            const labels = [
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
+                    'December'
+                ];
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Product purchased',
+                        data: [],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)'
+                            
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                        ],
+                        borderWidth: 1
+                    },{
+                        label: 'Sales',
+                        data: [],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                        ],
+                        borderWidth: 1
+                    },{
+                        label: 'Ending Inventory',
+                        data: [],
+                        backgroundColor: [                            
+                            'rgba(255, 206, 86, 0.2)',
+                        ],
+                        borderColor: [                           
+                            'rgba(255, 206, 86, 1)',                            
+                        ],
+                        borderWidth: 1
+                    },{
+                        label: 'Profit',
+                        data: [],
+                        backgroundColor: [                      
+                            'rgba(75, 192, 192, 0.2)',                           
+                        ],
+                        borderColor: [                       
+                            'rgba(75, 192, 192, 1)',                           
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    maintainAspectRatio:false,
+                    scales: {
+                        
+                        y: {
+                            beginAtZero: true
                         }
-                    });
+                    }
                 }
             });
+            //second graph
+            const ctx1 = document.getElementById('secondChart').getContext('2d');
+            const secondChart = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Product purchased',
+                        data: [],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)'
+                            
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                        ],
+                        borderWidth: 1
+                    },{
+                        label: 'Sales',
+                        data: [],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                        ],
+                        borderWidth: 1
+                    },{
+                        label: 'Ending Inventory',
+                        data: [],
+                        backgroundColor: [                            
+                            'rgba(255, 206, 86, 0.2)',
+                        ],
+                        borderColor: [                           
+                            'rgba(255, 206, 86, 1)',                            
+                        ],
+                        borderWidth: 1
+                    },{
+                        label: 'Profit',
+                        data: [],
+                        backgroundColor: [                      
+                            'rgba(75, 192, 192, 0.2)',                           
+                        ],
+                        borderColor: [                       
+                            'rgba(75, 192, 192, 1)',                           
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    maintainAspectRatio:false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            // $.ajax({
+            //     type:"POST",
+            //     url:"show_revenue.php",
+            //     data:{year_now:year_now},
+            //     dataType:"JSON",
+            //     success: function(res){
+
+            //     }
+            // });
+        
+            
             // $.ajax({
             // type:"POST",
             // url:"show_revenue.php",
@@ -206,9 +325,13 @@
             //                 res.september_revenue,
             //                 res.october_revenue,
             //                 res.november_revenue,
-            //                 res.december_revenue],
+            //                 res.december_revenue
+                                // ],
             //         }]
             //     };
+                
+            //     // 
+               
             //     const config = {
             //         type: 'bar',
             //         data: data,
@@ -218,26 +341,374 @@
             //     document.getElementById('myChart'),
             //     config
             //     );
+                
             // }
             // });
+            
+            const d = new Date();
+            let year_now = d.getFullYear();
+            // ------------------------first chart----------------
+            $.ajax({
+                type:"POST",
+                url:"show_revenue.php",
+                data:{value:year_now},
+                dataType:"JSON",
+                success: function(res){
+                    // console.log(year_now);
+                    myChart.data.datasets[0].data = [
+                        res.january_capital,
+                        res.feb_capital,
+                        res.march_capital,
+                        res.april_capital,
+                        res.may_capital,
+                        res.june_capital,
+                        res.july_capital,
+                        res.august_capital,
+                        res.september_capital,
+                        res.october_capital,
+                        res.november_capital,
+                        res.december_capital,
+                    ];
+                    myChart.data.datasets[1].data = [
+                        res.january_sold,
+                        res.feb_sold,
+                        res.march_sold,
+                        res.april_sold,
+                        res.may_sold,
+                        res.june_sold,
+                        res.july_sold,
+                        res.agust_sold,
+                        res.september_sold,
+                        res.october_sold,
+                        res.november_sold,
+                        res.december_sold,
+                    ];
+                    myChart.data.datasets[2].data = [
+                        res.january_ending_inventory,
+                        res.feb_ending_inventory,
+                        res.march_ending_inventory,
+                        res.april_ending_inventory,
+                        res.may_ending_inventory,
+                        res.june_ending_inventory,
+                        res.july_ending_inventory,
+                        res.august_ending_inventory,
+                        res.september_ending_inventory,
+                        res.october_ending_inventory,
+                        res.november_ending_inventory,
+                        res.december_ending_inventory
+                    ];
+                    myChart.data.datasets[3].data = [
+                        res.january_revenue,
+                        res.feb_revenue,
+                        res.march_revenue,
+                        res.april_revenue,
+                        res.may_revenue,
+                        res.june_revenue,
+                        res.july_revenue,
+                        res.august_revenue,
+                        res.september_revenue,
+                        res.october_revenue,
+                        res.november_revenue,
+                        res.december_revenue
+                    ];
+                    myChart.update();
+                }
+            });
+            // ------------------end first chart------------------
+
+            // ---------------------second chart-------------------
+            var selected_category = $("#category").val();
+            $.ajax({   
+                type:"POST",
+                url:"change_year.php",
+                data:{value:year_now,
+                    selected_category:selected_category
+                    },
+                dataType:"JSON",
+                success: function(res){
+                    console.log(selected_category);
+                    secondChart.data.datasets[0].data = [
+                        res.january_capital,
+                        res.feb_capital,
+                        res.march_capital,
+                        res.april_capital,
+                        res.may_capital,
+                        res.june_capital,
+                        res.july_capital,
+                        res.august_capital,
+                        res.september_capital,
+                        res.october_capital,
+                        res.november_capital,
+                        res.december_capital,
+                    ];
+                    secondChart.data.datasets[1].data = [
+                        res.january_sold,
+                        res.feb_sold,
+                        res.march_sold,
+                        res.april_sold,
+                        res.may_sold,
+                        res.june_sold,
+                        res.july_sold,
+                        res.agust_sold,
+                        res.september_sold,
+                        res.october_sold,
+                        res.november_sold,
+                        res.december_sold,
+                    ];
+                    secondChart.data.datasets[2].data = [
+                        res.january_ending_inventory,
+                        res.feb_ending_inventory,
+                        res.march_ending_inventory,
+                        res.april_ending_inventory,
+                        res.may_ending_inventory,
+                        res.june_ending_inventory,
+                        res.july_ending_inventory,
+                        res.august_ending_inventory,
+                        res.september_ending_inventory,
+                        res.october_ending_inventory,
+                        res.november_ending_inventory,
+                        res.december_ending_inventory
+                    ];
+                    secondChart.data.datasets[3].data = [
+                        res.january_revenue,
+                        res.feb_revenue,
+                        res.march_revenue,
+                        res.april_revenue,
+                        res.may_revenue,
+                        res.june_revenue,
+                        res.july_revenue,
+                        res.august_revenue,
+                        res.september_revenue,
+                        res.october_revenue,
+                        res.november_revenue,
+                        res.december_revenue
+                    ];
+                    secondChart.update();
+                }
+            });
+            // ----------------------end second chart---------------
+            
+            // ------------------------change year---------------------
             $("#picker").yearpicker({
                 year : year_now,
                 onChange : function(value){
+                    //first graph
                     $.ajax({
                         type:"POST",
-                        url:"change_year.php",
+                        url:"show_revenue.php",
                         data:{value:value},
                         dataType:"JSON",
                         success: function(res){
-                            // myChart.data.datasets[0].data = [
-                            //     4,5,6,7,8,9
-                            // ];
-                            // myChart.update();
-                            console.log("skefsndjfn");
+                            console.log(value);
+                            myChart.data.datasets[0].data = [
+                                res.january_capital,
+                                res.feb_capital,
+                                res.march_capital,
+                                res.april_capital,
+                                res.may_capital,
+                                res.june_capital,
+                                res.july_capital,
+                                res.august_capital,
+                                res.september_capital,
+                                res.october_capital,
+                                res.november_capital,
+                                res.december_capital,
+                            ];
+                            myChart.data.datasets[1].data = [
+                                res.january_sold,
+                                res.feb_sold,
+                                res.march_sold,
+                                res.april_sold,
+                                res.may_sold,
+                                res.june_sold,
+                                res.july_sold,
+                                res.agust_sold,
+                                res.september_sold,
+                                res.october_sold,
+                                res.november_sold,
+                                res.december_sold,
+                            ];
+                            myChart.data.datasets[2].data = [
+                                res.january_ending_inventory,
+                                res.feb_ending_inventory,
+                                res.march_ending_inventory,
+                                res.april_ending_inventory,
+                                res.may_ending_inventory,
+                                res.june_ending_inventory,
+                                res.july_ending_inventory,
+                                res.august_ending_inventory,
+                                res.september_ending_inventory,
+                                res.october_ending_inventory,
+                                res.november_ending_inventory,
+                                res.december_ending_inventory
+                            ];
+                            myChart.data.datasets[3].data = [
+                                res.january_revenue,
+                                res.feb_revenue,
+                                res.march_revenue,
+                                res.april_revenue,
+                                res.may_revenue,
+                                res.june_revenue,
+                                res.july_revenue,
+                                res.august_revenue,
+                                res.september_revenue,
+                                res.october_revenue,
+                                res.november_revenue,
+                                res.december_revenue
+                            ];
+                            myChart.update();
+                        }
+                    });
+                    // second graph
+                    $.ajax({
+                        type:"POST",
+                        url:"change_year.php",
+                        data:{value:value,
+                            selected_category:selected_category
+                            },
+                        dataType:"JSON",
+                        success: function(res){
+                            console.log(selected_category);
+                            
+                            secondChart.data.datasets[0].data = [
+                                res.january_capital,
+                                res.feb_capital,
+                                res.march_capital,
+                                res.april_capital,
+                                res.may_capital,
+                                res.june_capital,
+                                res.july_capital,
+                                res.august_capital,
+                                res.september_capital,
+                                res.october_capital,
+                                res.november_capital,
+                                res.december_capital,
+                            ];
+                            secondChart.data.datasets[1].data = [
+                                res.january_sold,
+                                res.feb_sold,
+                                res.march_sold,
+                                res.april_sold,
+                                res.may_sold,
+                                res.june_sold,
+                                res.july_sold,
+                                res.agust_sold,
+                                res.september_sold,
+                                res.october_sold,
+                                res.november_sold,
+                                res.december_sold,
+                            ];
+                            secondChart.data.datasets[2].data = [
+                                res.january_ending_inventory,
+                                res.feb_ending_inventory,
+                                res.march_ending_inventory,
+                                res.april_ending_inventory,
+                                res.may_ending_inventory,
+                                res.june_ending_inventory,
+                                res.july_ending_inventory,
+                                res.august_ending_inventory,
+                                res.september_ending_inventory,
+                                res.october_ending_inventory,
+                                res.november_ending_inventory,
+                                res.december_ending_inventory
+                            ];
+                            secondChart.data.datasets[3].data = [
+                                res.january_revenue,
+                                res.feb_revenue,
+                                res.march_revenue,
+                                res.april_revenue,
+                                res.may_revenue,
+                                res.june_revenue,
+                                res.july_revenue,
+                                res.august_revenue,
+                                res.september_revenue,
+                                res.october_revenue,
+                                res.november_revenue,
+                                res.december_revenue
+                            ];
+                            secondChart.update();
                         }
                     });
                 }
             });
+            // --------------------second chart change category------------
+            $("#category").on('change',function(){
+                        var change_cat = $(this).val();
+                        var year = $("#picker").val();
+                        // console.log(year);
+                        $.ajax({
+                        type:"POST",
+                        url:"change_year.php",
+                        data:{value:year,
+                            selected_category:change_cat
+                            },
+                        dataType:"JSON",
+                        success: function(res){
+                            // console.log(res.year_now);
+                            secondChart.data.datasets[0].data = [
+                                res.january_capital,
+                                res.feb_capital,
+                                res.march_capital,
+                                res.april_capital,
+                                res.may_capital,
+                                res.june_capital,
+                                res.july_capital,
+                                res.august_capital,
+                                res.september_capital,
+                                res.october_capital,
+                                res.november_capital,
+                                res.december_capital,
+                            ];
+                            secondChart.data.datasets[1].data = [
+                                res.january_sold,
+                                res.feb_sold,
+                                res.march_sold,
+                                res.april_sold,
+                                res.may_sold,
+                                res.june_sold,
+                                res.july_sold,
+                                res.agust_sold,
+                                res.september_sold,
+                                res.october_sold,
+                                res.november_sold,
+                                res.december_sold,
+                            ];
+                            secondChart.data.datasets[2].data = [
+                                res.january_ending_inventory,
+                                res.feb_ending_inventory,
+                                res.march_ending_inventory,
+                                res.april_ending_inventory,
+                                res.may_ending_inventory,
+                                res.june_ending_inventory,
+                                res.july_ending_inventory,
+                                res.august_ending_inventory,
+                                res.september_ending_inventory,
+                                res.october_ending_inventory,
+                                res.november_ending_inventory,
+                                res.december_ending_inventory
+                            ];
+                            secondChart.data.datasets[3].data = [
+                                res.january_revenue,
+                                res.feb_revenue,
+                                res.march_revenue,
+                                res.april_revenue,
+                                res.may_revenue,
+                                res.june_revenue,
+                                res.july_revenue,
+                                res.august_revenue,
+                                res.september_revenue,
+                                res.october_revenue,
+                                res.november_revenue,
+                                res.december_revenue
+                            ];
+                            secondChart.update();
+                            }
+                        });
+
+                    });
+            // ----------------------end second chart change category-----------
+            // console.log($('#picker').val());
+
             
             
             

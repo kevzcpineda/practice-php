@@ -17,9 +17,12 @@
     
     $year_now = $_POST['value'];
     $selected_category = $_POST['selected_category'];
+    
     $number_of_category = 0;
     $total_product = 0;
-    
+
+    $data["year_now"] = $year_now;
+
     $total_listing = 0;
     $capital = 0;
     $total_capital = 0;
@@ -341,12 +344,12 @@
     $data["november_sold"] = $november_sold;
     $data["november_revenue"] = $november_revenue;
     // -------------------monthly sales report for december----------------
-    $monthly_capital_sql = "SELECT * FROM add_quantity WHERE date>='".$year_now."-12-01' AND date<='".$year_now."-12-31' AND category='$selected_category'";
+    $monthly_capital_sql = "SELECT * FROM add_quantity WHERE date>='".$year_now."-12-01' AND date<='".$year_now."-12-31'";
     $prepareStatement = $con->prepare($monthly_capital_sql);
     $monthly_capital_result = $prepareStatement->execute();
     $monthly_capital_records = $prepareStatement->fetchAll();
 
-    $monthly_sale_sql = "SELECT * FROM sale_record WHERE date>='".$year_now."-12-01' AND date<='".$year_now."-12-31' AND category='$selected_category'";
+    $monthly_sale_sql = "SELECT * FROM sale_record WHERE date>='".$year_now."-12-01' AND date<='".$year_now."-12-31'";
     $prepareStatement = $con->prepare($monthly_sale_sql);
     $monthly_sales_result = $prepareStatement->execute();
     $monthly_sale_records = $prepareStatement->fetchAll();
@@ -366,151 +369,6 @@
     $data["december_capital"] = $december_capital;
     $data["december_sold"] = $december_sold;
     $data["december_revenue"] = $december_revenue;
-
-    // -----------------------------monthly ending inventory for january------------------
-    $monthly_ending_inventory_sql = "SELECT * FROM ending_inventory WHERE date>='".$year_now."-1-01' AND date<='".$year_now."-1-31' AND product_category='$selected_category' ORDER BY id DESC LIMIT 1";
-    $prepareStatement = $con->prepare($monthly_ending_inventory_sql);
-    $monthly_ending_inventory= $prepareStatement->execute();
-    $monthly_ending_inventory_records = $prepareStatement->fetchAll();
-
-    $january_ending_inventory = 0;
-
-    foreach ($monthly_ending_inventory_records as $monthly_ending_inventory_record){
-        $january_ending_inventory = $january_ending_inventory + $monthly_ending_inventory_record['ending_inventory'];
-    }
-    $data["january_ending_inventory"] = $january_ending_inventory;
-    // -----------------------------monthly ending inventory for feb------------------
-    $monthly_ending_inventory_sql = "SELECT * FROM ending_inventory WHERE date>='".$year_now."-2-01' AND date<='".$year_now."-2-31' AND product_category='$selected_category' ORDER BY id DESC LIMIT 1";
-    $prepareStatement = $con->prepare($monthly_ending_inventory_sql);
-    $monthly_ending_inventory= $prepareStatement->execute();
-    $monthly_ending_inventory_records = $prepareStatement->fetchAll();
-
-    $feb_ending_inventory = 0;
-
-    foreach ($monthly_ending_inventory_records as $monthly_ending_inventory_record){
-        $feb_ending_inventory = $feb_ending_inventory + $monthly_ending_inventory_record['ending_inventory'];
-    }
-    $data["feb_ending_inventory"] = $feb_ending_inventory;
-    // -----------------------------monthly ending inventory for march------------------
-    $monthly_ending_inventory_sql = "SELECT * FROM ending_inventory WHERE date>='".$year_now."-3-01' AND date<='".$year_now."-3-31' AND product_category='$selected_category' ORDER BY id DESC LIMIT 1";
-    $prepareStatement = $con->prepare($monthly_ending_inventory_sql);
-    $monthly_ending_inventory= $prepareStatement->execute();
-    $monthly_ending_inventory_records = $prepareStatement->fetchAll();
-
-    $march_ending_inventory = 0;
-
-    foreach ($monthly_ending_inventory_records as $monthly_ending_inventory_record){
-        $march_ending_inventory = $march_ending_inventory + $monthly_ending_inventory_record['ending_inventory'];
-    }
-    $data["march_ending_inventory"] = $march_ending_inventory;
-    // -----------------------------monthly ending inventory for april------------------
-    $monthly_ending_inventory_sql = "SELECT * FROM ending_inventory WHERE date>='".$year_now."-4-01' AND date<='".$year_now."-4-31' AND product_category='$selected_category' ORDER BY id DESC LIMIT 1";
-    $prepareStatement = $con->prepare($monthly_ending_inventory_sql);
-    $monthly_ending_inventory= $prepareStatement->execute();
-    $monthly_ending_inventory_records = $prepareStatement->fetchAll();
-
-    $april_ending_inventory = 0;
-
-    foreach ($monthly_ending_inventory_records as $monthly_ending_inventory_record){
-        $april_ending_inventory = $april_ending_inventory + $monthly_ending_inventory_record['ending_inventory'];
-    }
-    $data["april_ending_inventory"] = $april_ending_inventory;
-    // -----------------------------monthly ending inventory for may------------------
-    $monthly_ending_inventory_sql = "SELECT * FROM ending_inventory WHERE date>='".$year_now."-5-01' AND date<='".$year_now."-5-31' AND product_category='$selected_category' ORDER BY id DESC LIMIT 1";
-    $prepareStatement = $con->prepare($monthly_ending_inventory_sql);
-    $monthly_ending_inventory= $prepareStatement->execute();
-    $monthly_ending_inventory_records = $prepareStatement->fetchAll();
-
-    $may_ending_inventory = 0;
-
-    foreach ($monthly_ending_inventory_records as $monthly_ending_inventory_record){
-        $may_ending_inventory = $may_ending_inventory + $monthly_ending_inventory_record['ending_inventory'];
-    }
-    $data["may_ending_inventory"] = $may_ending_inventory;
-    // -----------------------------monthly ending inventory for june------------------
-    $monthly_ending_inventory_sql = "SELECT * FROM ending_inventory WHERE date>='".$year_now."-6-01' AND date<='".$year_now."-6-31' AND product_category='$selected_category' ORDER BY id DESC LIMIT 1";
-    $prepareStatement = $con->prepare($monthly_ending_inventory_sql);
-    $monthly_ending_inventory= $prepareStatement->execute();
-    $monthly_ending_inventory_records = $prepareStatement->fetchAll();
-
-    $june_ending_inventory = 0;
-
-    foreach ($monthly_ending_inventory_records as $monthly_ending_inventory_record){
-        $june_ending_inventory = $june_ending_inventory + $monthly_ending_inventory_record['ending_inventory'];
-    }
-    $data["june_ending_inventory"] = $june_ending_inventory;
-    // -----------------------------monthly ending inventory for july------------------
-    $monthly_ending_inventory_sql = "SELECT * FROM ending_inventory WHERE date>='".$year_now."-7-01' AND date<='".$year_now."-7-31' AND product_category='$selected_category' ORDER BY id DESC LIMIT 1";
-    $prepareStatement = $con->prepare($monthly_ending_inventory_sql);
-    $monthly_ending_inventory= $prepareStatement->execute();
-    $monthly_ending_inventory_records = $prepareStatement->fetchAll();
-
-    $july_ending_inventory = 0;
-
-    foreach ($monthly_ending_inventory_records as $monthly_ending_inventory_record){
-        $july_ending_inventory = $july_ending_inventory + $monthly_ending_inventory_record['ending_inventory'];
-    }
-    $data["july_ending_inventory"] = $july_ending_inventory;
-    // -----------------------------monthly ending inventory for august------------------
-    $monthly_ending_inventory_sql = "SELECT * FROM ending_inventory WHERE date>='".$year_now."-8-01' AND date<='".$year_now."-8-31' AND product_category='$selected_category' ORDER BY id DESC LIMIT 1";
-    $prepareStatement = $con->prepare($monthly_ending_inventory_sql);
-    $monthly_ending_inventory= $prepareStatement->execute();
-    $monthly_ending_inventory_records = $prepareStatement->fetchAll();
-
-    $august_ending_inventory = 0;
-
-    foreach ($monthly_ending_inventory_records as $monthly_ending_inventory_record){
-        $august_ending_inventory = $august_ending_inventory + $monthly_ending_inventory_record['ending_inventory'];
-    }
-    $data["august_ending_inventory"] = $august_ending_inventory;
-    // -----------------------------monthly ending inventory for september------------------
-    $monthly_ending_inventory_sql = "SELECT * FROM ending_inventory WHERE date>='".$year_now."-9-01' AND date<='".$year_now."-9-31' AND product_category='$selected_category' ORDER BY id DESC LIMIT 1";
-    $prepareStatement = $con->prepare($monthly_ending_inventory_sql);
-    $monthly_ending_inventory= $prepareStatement->execute();
-    $monthly_ending_inventory_records = $prepareStatement->fetchAll();
-
-    $september_ending_inventory = 0;
-
-    foreach ($monthly_ending_inventory_records as $monthly_ending_inventory_record){
-        $september_ending_inventory = $september_ending_inventory + $monthly_ending_inventory_record['ending_inventory'];
-    }
-    $data["september_ending_inventory"] = $september_ending_inventory;
-    // -----------------------------monthly ending inventory for october------------------
-    $monthly_ending_inventory_sql = "SELECT * FROM ending_inventory WHERE date>='".$year_now."-10-01' AND date<='".$year_now."-10-31' AND product_category='$selected_category' ORDER BY id DESC LIMIT 1";
-    $prepareStatement = $con->prepare($monthly_ending_inventory_sql);
-    $monthly_ending_inventory= $prepareStatement->execute();
-    $monthly_ending_inventory_records = $prepareStatement->fetchAll();
-
-    $october_ending_inventory = 0;
-
-    foreach ($monthly_ending_inventory_records as $monthly_ending_inventory_record){
-        $october_ending_inventory = $october_ending_inventory + $monthly_ending_inventory_record['ending_inventory'];
-    }
-    $data["october_ending_inventory"] = $october_ending_inventory;
-    // -----------------------------monthly ending inventory for november------------------
-    $monthly_ending_inventory_sql = "SELECT * FROM ending_inventory WHERE date>='".$year_now."-11-01' AND date<='".$year_now."-11-31' AND product_category='$selected_category' ORDER BY id DESC LIMIT 1";
-    $prepareStatement = $con->prepare($monthly_ending_inventory_sql);
-    $monthly_ending_inventory= $prepareStatement->execute();
-    $monthly_ending_inventory_records = $prepareStatement->fetchAll();
-
-    $november_ending_inventory = 0;
-
-    foreach ($monthly_ending_inventory_records as $monthly_ending_inventory_record){
-        $november_ending_inventory = $november_ending_inventory + $monthly_ending_inventory_record['ending_inventory'];
-    }
-    $data["november_ending_inventory"] = $november_ending_inventory;
-    // -----------------------------monthly ending inventory for december------------------
-    $monthly_ending_inventory_sql = "SELECT * FROM ending_inventory WHERE date>='".$year_now."-12-01' AND date<='".$year_now."-12-31' AND product_category='$selected_category' ORDER BY id DESC LIMIT 1";
-    $prepareStatement = $con->prepare($monthly_ending_inventory_sql);
-    $monthly_ending_inventory= $prepareStatement->execute();
-    $monthly_ending_inventory_records = $prepareStatement->fetchAll();
-
-    $december_ending_inventory = 0;
-
-    foreach ($monthly_ending_inventory_records as $monthly_ending_inventory_record){
-        $december_ending_inventory = $december_ending_inventory + $monthly_ending_inventory_record['ending_inventory'];
-    }
-    $data["december_ending_inventory"] = $december_ending_inventory;
     
 
     echo json_encode($data);
