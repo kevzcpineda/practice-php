@@ -4,7 +4,34 @@
         $value = $_POST['value'];
         $item_cat = $_POST['item_cat'];
         
-        if($value != "all" and $item_cat == "all"){
+        if($value == "all" and $item_cat != "all"){
+            $sql = "SELECT * FROM student WHERE item_category ='$item_cat'";
+            $prepareStatement = $con->prepare($sql);
+            $result = $prepareStatement->execute();
+            $users = $prepareStatement->fetchAll();
+
+            foreach ($users as $user){
+            echo   "<tr>";
+            echo      " <td>" .$user['id']."</td>";
+            echo       "  <td>". $user['product']."</td>    " ;           
+            echo       "  <td>".$user['category']."</td>    ";            
+            echo       "  <td>".$user['item_category']."</td>    ";            
+            echo       "  <td>".$user['brand']."</td>    ";            
+            echo       "  <td>".number_format($user['listing_price'],'2','.',',')."</td>";
+            echo       "  <td>".number_format($user['retail_price'],'2','.',',')."</td>";
+            echo       "  <td>".$user['unit']."</td>    ";   
+            echo         "<td> ".number_format($user['stock'])."</td>";
+            echo        " <td>       ";                          
+            echo            " <button type = 'button'  class='btn btn-success edtitBtn'>Edit</button>";
+            echo           "  <button type = 'button' class ='btn btn-danger deleteBtn' >Delete</button>";
+            echo          "   <button type = 'button' class ='btn btn-primary addQuanBtn' >Add quantity</button>";
+                
+            echo       "  </td>";
+            echo     "</tr>";
+        
+        }
+
+        }elseif($value != "all" and $item_cat == "all"){
             $sql = "SELECT * FROM student WHERE category ='$value'";
             $prepareStatement = $con->prepare($sql);
             $result = $prepareStatement->execute();
@@ -29,36 +56,8 @@
             echo       "  </td>";
             echo     "</tr>";
         
-        }
-
-        }elseif($value == "all" and $item_cat != "all"){
-            $sql = "SELECT * FROM student WHERE item_category = '$item_cat'";
-            $prepareStatement = $con->prepare($sql);
-            $result = $prepareStatement->execute();
-            $users = $prepareStatement->fetchAll();
-
-            foreach ($users as $user){
-            echo   "<tr>";
-            echo      " <td>" .$user['id']."</td>";
-            echo       "  <td>". $user['product']."</td>    " ;           
-            echo       "  <td>".$user['category']."</td>    ";            
-            echo       "  <td>".$user['item_category']."</td>    ";            
-            echo       "  <td>".$user['brand']."</td>    ";            
-            echo       "  <td>".number_format($user['listing_price'],'2','.',',')."</td>";
-            echo       "  <td>".number_format($user['retail_price'],'2','.',',')."</td>";
-            echo       "  <td>".$user['unit']."</td>    ";   
-            echo         "<td> ".number_format($user['stock'])."</td>";
-            echo        " <td>       ";                          
-            echo            " <button type = 'button'  class='btn btn-success edtitBtn'>Edit</button>";
-            echo           "  <button type = 'button' class ='btn btn-danger deleteBtn' >Delete</button>";
-            echo          "   <button type = 'button' class ='btn btn-primary addQuanBtn' >Add quantity</button>";
-                
-            echo       "  </td>";
-            echo     "</tr>";
-        
             }
-        }
-        elseif($value != "all" and $item_cat != "all"){
+        }elseif($value != "all" and $item_cat != "all"){
             $sql = "SELECT * FROM student WHERE category ='$value' AND item_category = '$item_cat'";
             $prepareStatement = $con->prepare($sql);
             $result = $prepareStatement->execute();
@@ -84,7 +83,7 @@
             echo     "</tr>";
         
             }
-        }else{
+        }elseif($value == "all" and $item_cat == "all"){
             $sql = "SELECT * FROM student ORDER BY id DESC";
             $prepareStatement = $con->prepare($sql);
             $result = $prepareStatement->execute();
@@ -109,9 +108,36 @@
             echo       "  </td>";
             echo     "</tr>";
         
+            }
         }
+        // else{
+        //     $sql = "SELECT * FROM student ORDER BY id DESC";
+        //     $prepareStatement = $con->prepare($sql);
+        //     $result = $prepareStatement->execute();
+        //     $users = $prepareStatement->fetchAll();
 
-        }
+        //     foreach ($users as $user){
+        //     echo   "<tr>";
+        //     echo      " <td>" .$user['id']."</td>";
+        //     echo       "  <td>". $user['product']."</td>    " ;           
+        //     echo       "  <td>".$user['category']."</td>    ";            
+        //     echo       "  <td>".$user['item_category']."</td>    ";            
+        //     echo       "  <td>".$user['brand']."</td>    ";            
+        //     echo       "  <td>".number_format($user['listing_price'],'2','.',',')."</td>";
+        //     echo       "  <td>".number_format($user['retail_price'],'2','.',',')."</td>";
+        //     echo       "  <td>".$user['unit']."</td>    ";   
+        //     echo         "<td> ".number_format($user['stock'])."</td>";
+        //     echo        " <td>       ";                          
+        //     echo            " <button type = 'button'  class='btn btn-success edtitBtn'>Edit</button>";
+        //     echo           "  <button type = 'button' class ='btn btn-danger deleteBtn' >Delete</button>";
+        //     echo          "   <button type = 'button' class ='btn btn-primary addQuanBtn' >Add quantity</button>";
+                
+        //     echo       "  </td>";
+        //     echo     "</tr>";
+        
+        // }
+
+        // }
         
     
     }

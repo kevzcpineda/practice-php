@@ -10,6 +10,7 @@
     <title>sales</title>
 </head>
 <body>
+    <?php include("navbar.php");?>
     <?php
         $page = 'sales';
         include("connect.php");
@@ -29,27 +30,7 @@
         // echo "</pre>";
 
     ?>
-    <div class="bar">
-        <div class="container">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.php">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="product.php">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="sales.php">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="category.php">Categorys</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="brand.php">Brands</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    
     <!-- ---------------------ORDER MODAL------------------- -->
      <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

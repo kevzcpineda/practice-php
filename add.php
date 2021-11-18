@@ -6,7 +6,9 @@
     if(isset($_POST['submit'])){
         $product = trim($_POST['product']); 
         $category = trim($_POST['category']);  
+        $item_category = trim($_POST['item_category']);  
         $brand = trim($_POST['brand']);  
+        $unit = $_POST['unit'];
 
         $selectUsers = "SELECT * FROM student WHERE product='$product' AND category='$category' AND brand='$brand'";
         $prepareStatement = mysqli_query($con,"SELECT * FROM student WHERE product='$product' AND category='$category' AND brand='$brand'");
@@ -95,7 +97,7 @@
 
         
         if(($listing_error == false) && ($product_error == false) && ($retail_error == false) && ($category_error == false) && ($stock_error == false) && ($success_error == false) && ($brand_error == false)){
-            $add_user = "INSERT INTO `student`(`id`, `product`,`category`,`brand`,`listing_price`,`retail_price`,`stock`) VALUES (null,'$product','$category','$brand','$listing_price','$retail_price','$stock')";
+            $add_user = "INSERT INTO `student`(`id`, `product`,`category`,`item_category`,`brand`,`listing_price`,`retail_price`,`unit`,`stock`) VALUES (null,'$product','$category','$item_category','$brand','$listing_price','$retail_price','$unit','$stock')";
             $prepareStatement_user = $con->prepare($add_user);
             $user_result = $prepareStatement_user->execute();
 

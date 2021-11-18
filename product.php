@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body >
+    <?php include("navbar.php");?>
     <?php
         $page = 'product';
         include("connect.php");
@@ -17,6 +18,11 @@
         $prepareStatement = $con->prepare($selectUsers);
         $result = $prepareStatement->execute();
         $users = $prepareStatement->fetchAll();
+
+        $item_category_sql = "SELECT * FROM item_category";
+        $prepareStatement = $con->prepare($item_category_sql);
+        $result = $prepareStatement->execute();
+        $item_categorys = $prepareStatement->fetchAll();
 
         $category_sql = "SELECT * FROM category_table";
         $prepareStatement = $con->prepare($category_sql);
@@ -34,7 +40,7 @@
         // echo "</pre>";
 
     ?>
-    <div class="bar">
+    <!-- <div class="bar">
         <div class="container">
             <ul class="nav">
                 <li class="nav-item">
@@ -54,43 +60,8 @@
                 </li>
             </ul>
         </div>
-    </div>
-    <!-- <div class="l-navbar" id="navbar">
-        <nav class="nav">
-            <div>
-                <div class="nav__brand">
-                    <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                    <a href="#" class="nav__logo"></a>
-                </div>
-                <div class="nav__list">
-                    <a href="index.php" class="nav__link <?php if($page=='index'){echo 'active';}?>">
-                        <ion-icon name="home-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Dashboard</span>
-                    </a>
-                    <a href="product.php" class="nav__link <?php if($page=='product'){echo 'active';}?>">
-                        <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Products</span>
-                    </a>
-                    <a href="sales.php" class="nav__link <?php if($page=='sales'){echo 'active';}?>">
-                        <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Sales</span>
-                    </a>
-                    <a href="category.php" class="nav__link <?php if($page=='category'){echo 'active';}?>">
-                        <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Category</span>
-                    </a>
-                    
-                    <a href="brand.php" class="nav__link <?php if($page=='brand'){echo 'active';}?>">
-                        <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
-                        <span class="nav__name">Brand</span>
-                    </a>
-                
-                </div>
-            </div>
-
-            
-        </nav>
     </div> -->
+    
     <!-- ---------------------ADD MODAL------------------- -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -120,12 +91,12 @@
                     <span id="cat_error"></span>  
                 </div>
                 <div class="">
-                    <label class="col-form-label" for="category">Item category</label>
-                    <select name="" id="category" class="form-control">
+                    <label class="col-form-label" for="item_category">Item category</label>
+                    <select name="" id="item_category" class="form-control">
                         <option value="">Select category</option>
                         <?php
-                            foreach ($categorys as $category){?>
-                                <option value="<?php echo $category['category']?>"><?php echo $category['category']?></option>
+                            foreach ($item_categorys as $item_category){?>
+                                <option value="<?php echo $item_category['item_category']?>"><?php echo $item_category['item_category']?></option>
                             <?php }
                         ?>
                     </select>
@@ -145,17 +116,30 @@
                 </div>
                 <div class="">
                     <label class="col-form-label">Listing Price</label>
-                    <input type="text" class="form-control" name="listing_price" id="listing_price">
+                    <input type="text" class="form-control" name="listing_price" id="listing_price" placeholder="Input listing price">
                     <span id="listing_error"></span> 
                 </div>
                 <div class="">
                     <label class="col-form-label">Retail Price</label>
-                    <input type="text" class="form-control" name="retail_price" id="retail_price"><br>
+                    <input type="text" class="form-control" name="retail_price" id="retail_price" placeholder="Input retail price">
                     <span id="retail_error"></span>
                 </div>
                 <div class="">
+                    <label class="col-form-label" for="unit">Unit</label>
+                    <select name="" id="unit" class="form-control">
+                        <option value="">Select unit</option>
+                        <option value="pcs">Pcs</option>
+                        <option value="kgs">Kgs</option>
+                        <option value="gross">Gross</option>
+                        <option value="lnFT">LnFT</option>
+                        <option value="sqFt">SqFt</option>
+                        <option value="tubes">Tubes</option>
+                    </select>
+                    <span id="cat_error"></span>  
+                </div>
+                <div class="">
                     <label class="col-form-label">Stock</label>
-                    <input type="number" class="form-control" name="stock" id="stock"><br>
+                    <input type="number" class="form-control" name="stock" id="stock" placeholder="Input stock">
                     <span id="stock_error"></span>
                 </div>
                 <span id="error"></span>
@@ -163,7 +147,7 @@
             
             </div>
             <div class="modal-footer">
-                <button type="submit" name="add"class="btn btn-primary" id="submit">Save changes</button>
+                <button type="submit" name="add"class="btn btn-primary" id="submit">Add product</button>
                 <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Close</button>
                 
                 
@@ -206,13 +190,13 @@
             </div>
             <div class="modal-body">
                 <form action="edit.php" method="POST">
-                
-            
                 <input type="hidden" name = "editId" id="edit_id"> 
+
                 <label class="col-form-label">Product</label>
-                <input type="text" name="product" id="edit_product" class="form-control"><br> 
-                <label class="col-form-label">Category</label>
-                <select name="category" id="edit_cat" class="form-control">>
+                <input type="text" name="product" id="edit_product" class="form-control">
+                
+                <label class="col-form-label">Product category</label>
+                <select name="category" id="edit_cat" class="form-control">
                     <?php
                         include("mysqli.php");
                         $catSql = "SELECT * FROM category_table";
@@ -220,9 +204,21 @@
                         while($row = $cat->fetch_assoc()){
                             echo '<option value="'.$row['category'].'">'.$row['category'].'</option>'; 
                     ?>
-                            
                     <?php } ?>
-                </select><br> 
+                </select>
+
+                <label class="col-form-label">Item category</label>
+                <select name="item_category" id="edit_item_cat" class="form-control">
+                    <?php
+                        include("mysqli.php");
+                        $catSql = "SELECT * FROM item_category";
+                        $cat = $con->query($catSql);
+                        while($row = $cat->fetch_assoc()){
+                            echo '<option value="'.$row['item_category'].'">'.$row['item_category'].'</option>'; 
+                    ?>
+                    <?php } ?>
+                </select>
+
                 <label class="col-form-label">Brand</label> 
                 <select name="brand" id="edit_brand" class="form-control">
                     <?php 
@@ -232,14 +228,25 @@
                         while($row = $brand->fetch_assoc()){
                             echo '<option value="'.$row['brand_name'].'">'.$row['brand_name'].'</option>'; 
                     ?>
-                            
                     <?php } ?>
-                </select><br>          
-                <label class="col-form-label">Listing Price</label>
-                <input type="text" name="listing_price" id="edit_listing_price" class="form-control"><br>
-                <label class="col-form-label">Retail Price</label>
-                <input type="text" name="retail_price" id="edit_retail_price" class="form-control"><br>
+                </select>
                 
+                <label class="col-form-label">Listing Price</label>
+                <input type="text" name="listing_price" id="edit_listing_price" class="form-control">
+
+                <label class="col-form-label">Retail Price</label>
+                <input type="text" name="retail_price" id="edit_retail_price" class="form-control">
+                
+                <label class="col-form-label" for="unit">Unit</label>
+                    <select name="" id="edit_unit" class="form-control">
+                        <option value="">Select unit</option>
+                        <option value="pcs">Pcs</option>
+                        <option value="kgs">Kgs</option>
+                        <option value="gross">Gross</option>
+                        <option value="lnFT">LnFT</option>
+                        <option value="sqFt">SqFt</option>
+                        <option value="tubes">Tubes</option>
+                    </select>
                 
 
             
@@ -307,6 +314,19 @@
                                 
                         <?php } ?>
                     </select>   
+                    <select name="" id="filter_item_category">
+                        <option value="all">Select filter</option>
+                        <?php 
+                            include("mysqli.php");
+                            $catSql = "SELECT * FROM item_category";
+                            $cat = $con->query($catSql);
+            
+                            while($row = $cat->fetch_assoc()){
+                                echo '<option value="'.$row['item_category'].'">'.$row['item_category'].'</option>'; 
+                        ?>
+                                
+                        <?php } ?>
+                    </select>   
                     <button type = "button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">Add product</button>
                 </div>
                 
@@ -317,10 +337,12 @@
                     <tr>
                     <th scope="col">id</th>
                     <th scope="col">Product</th> 
-                    <th scope="col">Category</th>           
+                    <th scope="col">Product category</th>           
+                    <th scope="col">Item category</th>           
                     <th scope="col">Brand</th>           
                     <th scope="col">Listing Price</th>
                     <th scope="col">Retail Price</th>
+                    <th scope="col">Unit</th>
                     <th scope="col">Stock</th>
                     <th scope="col">Action</th>
                     </tr>
@@ -332,9 +354,11 @@
                         <td><?php echo $user["id"]?></td>
                         <td><?php echo $user["product"]?></td>                
                         <td><?php echo $user["category"]?></td>                
+                        <td><?php echo $user["item_category"]?></td>                
                         <td><?php echo $user["brand"]?></td>                
                         <td><?php echo number_format($user["listing_price"],'2','.',',')?></td>
                         <td><?php echo number_format($user["retail_price"],'2','.',',')?></td>
+                        <td><?php echo $user["unit"]?></td>                
                         <td><?php echo number_format($user["stock"])?></td>
                         <td>                    
                             <button type = "button"  class="btn btn-success edtitBtn">Edit</button>
@@ -386,9 +410,12 @@
                     $("#edit_id").val(data[0]);
                     $("#edit_product").val(data[1]);
                     $("#edit_cat").val(data[2]);
-                    $("#edit_brand").val(data[3]);
-                    $("#edit_listing_price").val(data[4]);
-                    $("#edit_retail_price").val(data[5]);
+                    $("#edit_item_cat").val(data[3]);
+                    $("#edit_brand").val(data[4]);
+                    $("#edit_listing_price").val(data[5]);
+                    $("#edit_retail_price").val(data[6]);
+                    $("#edit_unit").val(data[7]);
+                    
                     
                     
             });
@@ -409,29 +436,48 @@
                 event.preventDefault();
                 var product = $("#product").val();
                 var category = $("#category").val();
+                var item_category = $("#item_category").val();
                 var brand = $("#brand").val();
                 var listing_price = $("#listing_price").val();
                 var retail_price = $("#retail_price").val();
+                var unit = $("#unit").val();
                 var stock = $("#stock").val();
                 var submit = $("#submit").val();
                 $("#error").load("add.php",{
                     product:product,
                     category:category,
+                    item_category:item_category,
                     brand:brand,
                     listing_price:listing_price,
                     retail_price:retail_price,
+                    unit:unit,
                     stock:stock,
                     submit:submit
                 });
 
             });
 
-            // -------------------FILTER CATEGORY---------------
+            // -------------------FILTER PRODUCT CATEGORY---------------
             $("#filter_category").on('change',function(){
-                var value = $("#filter_category").val();  
+                var value = $("#filter_category").val(); 
+                var item_cat = $("#filter_item_category").val();  
                 console.log(value);
+                console.log(item_cat);
                 $("#table_body").load("filter_category.php",{
-                    value:value
+                    value:value,
+                    item_cat:item_cat
+                });
+                    
+            });
+            $("#filter_item_category").on('change',function(){
+                var product_cat = $("#filter_category").val(); 
+                var item_cat = $("#filter_item_category").val(); 
+                
+                console.log(product_cat);
+                console.log(item_cat);
+                $("#table_body").load("filter_item_category.php",{
+                    value:product_cat,
+                    item_cat:item_cat
                 });
                     
             });
