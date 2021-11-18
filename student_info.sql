@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2021 at 12:45 PM
+-- Generation Time: Nov 18, 2021 at 12:54 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -97,6 +97,55 @@ CREATE TABLE `category_table` (
 INSERT INTO `category_table` (`id`, `category`) VALUES
 (4, 'category 1'),
 (5, 'category 2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ending_inventory`
+--
+
+CREATE TABLE `ending_inventory` (
+  `id` int(255) NOT NULL,
+  `product_category` varchar(255) NOT NULL,
+  `ending_inventory` decimal(20,2) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ending_inventory`
+--
+
+INSERT INTO `ending_inventory` (`id`, `product_category`, `ending_inventory`, `date`) VALUES
+(1, 'category 1', '60.00', '2021-11-01'),
+(2, 'category 2', '100.00', '2021-11-01'),
+(3, 'category 1', '60.00', '2021-11-02'),
+(4, 'category 2', '100.00', '2021-11-02'),
+(5, 'category 1', '60.00', '2021-11-02'),
+(6, 'category 2', '100.00', '2021-11-02'),
+(7, 'category 1', '60.00', '2021-11-02'),
+(8, 'category 2', '100.00', '2021-11-02'),
+(9, 'category 1', '60.00', '2021-11-03'),
+(10, 'category 2', '100.00', '2021-11-03'),
+(11, 'category 1', '1460.00', '2021-11-17'),
+(12, 'category 2', '50900.00', '2021-11-17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_category`
+--
+
+CREATE TABLE `item_category` (
+  `id` int(11) NOT NULL,
+  `item_category` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `item_category`
+--
+
+INSERT INTO `item_category` (`id`, `item_category`) VALUES
+(2, '4 barss');
 
 -- --------------------------------------------------------
 
@@ -249,6 +298,18 @@ ALTER TABLE `category_table`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ending_inventory`
+--
+ALTER TABLE `ending_inventory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `item_category`
+--
+ALTER TABLE `item_category`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `loan`
 --
 ALTER TABLE `loan`
@@ -293,6 +354,18 @@ ALTER TABLE `brand_table`
 --
 ALTER TABLE `category_table`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `ending_inventory`
+--
+ALTER TABLE `ending_inventory`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `item_category`
+--
+ALTER TABLE `item_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `loan`
