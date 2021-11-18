@@ -16,26 +16,7 @@
         $result = $prepareStatement->execute();
         $students = $prepareStatement->fetchAll();
     ?>
-    <div class="bar">
-        <div class="container">>
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Categorys</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Brands</a>
-                </li>
-            </ul>
-        </div>
+    <?php include("navbar.php")?>
     </div>
     <div class="container">
         <input type="text" id="customer_name"  placeholder="Customer name" class="form-control"><br>
@@ -99,7 +80,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
             
             var product_id = $("select").val();
             var add_product_btn = $("#submit").val();
-            var quantity = parseInt($("#quantity").val());
+            var quantity = $("#quantity").val();
             var available_stock = parseInt($("#available_stock").text());
             var total_orders = [];
             var total = 0;
@@ -164,8 +145,8 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
             var update_total = total - product_total;
             $("#total_order").text(update_total);
             
-            var quantity = parseInt(data[5]);
-            var available_stock = parseInt($("#available_stock").text());
+            var quantity = parseFloat(data[5]);
+            var available_stock = parseFloat($("#available_stock").text());
             var update_quantity = quantity + available_stock;
             $("#available_stock").text(update_quantity);
             $(this).closest('tr').remove();
