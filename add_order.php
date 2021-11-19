@@ -34,13 +34,15 @@
         <table class="table" id="t">
             <thead>
                 <tr>      
-                    <th scope="col">Product</th>        
-                    <th scope="col">Brand</th>            
-                    <th scope="col">Category</th>
+                    <th scope="col">Product</th>                   
+                    <th scope="col">Product category</th>
+                    <th scope="col">Item category</th>
+                    <th scope="col">Brand</th> 
                     <th scope="col">Listing price</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Total</th>
+                    <th scope="col">Unit</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead >
@@ -106,7 +108,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                 success:function(res){
                     if(quantity>0 && quantity<=available_stock){
                         // display table data
-                        $("#tbody").append('<tr><td class="product">'+res.product+'</td><td class="brand">'+res.brand+'</td><td class="category">'+res.category+'</td><td class="listing_price">'+res.listing_price+'</td><td class="retail_price">'+res.retail_price+'</td><td class="quantity">'+res.quantity+'</td><td class="total">'+res.total+'</td><td><button type="button"class="btn btn-danger delete" data-row="row'+count+'" name="remove'+count+'">Delete</button></td></tr>');
+                        $("#tbody").append('<tr><td class="product">'+res.product+'</td><td class="category">'+res.category+'</td><td class="item_category">'+res.item_category+'</td><td class="brand">'+res.brand+'</td><td class="listing_price">'+res.listing_price+'</td><td class="retail_price">'+res.retail_price+'</td><td class="quantity">'+res.quantity+'</td><td class="total">'+res.total+'</td><td class="unit">'+res.unit+'</td><td><button type="button"class="btn btn-danger delete" data-row="row'+count+'" name="remove'+count+'">Delete</button></td></tr>');
                         // reset quantity value
                         $("#quantity").val("");
                         //display new available stock
@@ -122,6 +124,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                         }
                         //display total order
                         $("#total_order").text(total);
+                        console.log($("#total_order").text());
                     }else{
                         alert("error");
                     }
@@ -153,15 +156,18 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
         }); 
 
         $("#save_btn").click(function(){
-            var total_order = $("#total_order").val();
+            var total_order = $("#total_order").text();
             var customer_name = $("#customer_name").val();
             var product = [];
             var brand = [];
             var category = [];
+            var item_category = [];
             var retail_price = [];
             var quantity = [];
             var listing_price = [];
             var total = [];
+            var unit = [];
+            
 
             $('.product').each(function(){
                 product.push($(this).text());
@@ -171,6 +177,9 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
             });
             $('.category').each(function(){
                 category.push($(this).text());
+            });
+            $('.item_category').each(function(){
+                item_category.push($(this).text());
             });
             $('.listing_price').each(function(){
                 listing_price.push($(this).text());
@@ -183,6 +192,9 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
             });
             $('.quantity').each(function(){
                 quantity.push($(this).text());
+            });
+            $('.unit').each(function(){
+                unit.push($(this).text());
             });
 
             if(customer_name == ""){
@@ -197,11 +209,13 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                         product:product,
                         brand:brand,
                         category:category,
+                        item_category:item_category,
                         retail_price:retail_price,
                         quantity:quantity,
                         listing_price:listing_price,
                         total:total,
                         total_order:total_order,
+                        unit:unit,
                         count:count
                     },
                     success:function(data){

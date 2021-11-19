@@ -21,8 +21,10 @@
             $data["product"] = $students['product'];
             $data["brand"] = $students['brand'];
             $data["category"] = $students['category'];
+            $data["item_category"] = $students['item_category'];
             $data["listing_price"] = $students['listing_price'];
             $data["retail_price"] = $students['retail_price'];
+            $data["unit"] = $students['unit'];
             $data["quantity"] = $quantity ;
             $data["total"] = $total ;
 

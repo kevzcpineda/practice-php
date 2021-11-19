@@ -7,16 +7,30 @@ $con = new mysqli($servername,$username,$password,$db);
 require_once __DIR__ . '/vendor/autoload.php';
 
 $id = $_GET['id'];
-$customerName = "MARY JOYCE NAVARRO";
+$customerName = "";
+$total = "";
+$order_table_sql = "SELECT * FROM order_table WHERE id='$id'";
+$order_table_result = mysqli_query($con,$order_table_sql);
+while($row = mysqli_fetch_array($order_table_result)){
+    $customerName = $row['customer_name'];
+    $total = $row['total'];
+}
+
 $sql = "SELECT * FROM sale_record WHERE product_id='$id'";
 $result = mysqli_query($con,$sql);
 $row_data = "";
+$count = 0;
 while($row = mysqli_fetch_array($result)){
+    $count = $count + 1;
     $row_data = $row_data."
         <tr>
-            <td>".$row['id']."</td>
+            <td>".$count."</td>
             <td>".$row['product_name']."</td>
-            <td>".$row['date']."</td>
+            <td>".$row['quantity']."</td>
+            <td>".$row['unit']."</td>
+            <td>".$row['price']."</td>
+            <td>".$row['total']."</td>
+            
         </tr>
     ";
 }
@@ -51,32 +65,8 @@ $html = '
             <td >SRP/unit</td>            
             <td >Total Amount SRP</td>            
         </tr>
-    
-        <tr>
-            <td>1</td>
-            <td>CENTERLOCK908 SMALL UNIVERSAL (W)</td>
-            <td>1</td>
-            <td>PCS</td>
-            <td>30.00</td>
-            <td>30.00</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>CENTERLOCK908 SMALL UNIVERSAL (W)</td>
-            <td>1</td>
-            <td>PCS</td>
-            <td>30.00</td>
-            <td>30.00</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>CENTERLOCK908 SMALL UNIVERSAL (W)</td>
-            <td>1</td>
-            <td>PCS</td>
-            <td>30.00</td>
-            <td>30.00</td>
-        </tr>
-    
+        
+        '.$row_data.'
     </table>
     <table class="total">
         <tr>
@@ -85,8 +75,9 @@ $html = '
             <td></td>
             <td></td>
             <td>TOTAL AMOUNT DUE:</td>
-            <td>200000.00</td>
+            <td>'.$total.'</td>
         </tr>
+        
     </table>
     <table class="signature">
         <tr>
