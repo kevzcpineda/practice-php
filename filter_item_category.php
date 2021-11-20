@@ -20,11 +20,11 @@
             echo       "  <td>".number_format($user['listing_price'],'2','.',',')."</td>";
             echo       "  <td>".number_format($user['retail_price'],'2','.',',')."</td>";
             echo       "  <td>".$user['unit']."</td>    ";   
-            echo         "<td> ".number_format($user['stock'])."</td>";
+            echo         "<td> ".number_format($user['stock'],'2','.',',')."</td>";
             echo        " <td>       ";                          
-            echo            " <button type = 'button'  class='btn btn-success edtitBtn'>Edit</button>";
-            echo           "  <button type = 'button' class ='btn btn-danger deleteBtn' >Delete</button>";
-            echo          "   <button type = 'button' class ='btn btn-primary addQuanBtn' >Add quantity</button>";
+            echo            " <button type = 'button'  class='btn btn-success edtitBtn'><i class='fas fa-edit'></i></button>";
+            echo           "  <button type = 'button' class ='btn btn-danger deleteBtn' ><i class='fas fa-trash-alt'></i></button>";
+            echo          "   <button type = 'button' class ='btn btn-primary addQuanBtn' ><i class='fas fa-plus'></i></button>";
                 
             echo       "  </td>";
             echo     "</tr>";
@@ -47,11 +47,11 @@
             echo       "  <td>".number_format($user['listing_price'],'2','.',',')."</td>";
             echo       "  <td>".number_format($user['retail_price'],'2','.',',')."</td>";
             echo       "  <td>".$user['unit']."</td>    ";   
-            echo         "<td> ".number_format($user['stock'])."</td>";
+            echo         "<td> ".number_format($user['stock'],'2','.',',')."</td>";
             echo        " <td>       ";                          
-            echo            " <button type = 'button'  class='btn btn-success edtitBtn'>Edit</button>";
-            echo           "  <button type = 'button' class ='btn btn-danger deleteBtn' >Delete</button>";
-            echo          "   <button type = 'button' class ='btn btn-primary addQuanBtn' >Add quantity</button>";
+            echo            " <button type = 'button'  class='btn btn-success edtitBtn'><i class='fas fa-edit'></i></button>";
+            echo           "  <button type = 'button' class ='btn btn-danger deleteBtn' ><i class='fas fa-trash-alt'></i></button>";
+            echo          "   <button type = 'button' class ='btn btn-primary addQuanBtn' ><i class='fas fa-plus'></i></button>";
                 
             echo       "  </td>";
             echo     "</tr>";
@@ -73,11 +73,11 @@
             echo       "  <td>".number_format($user['listing_price'],'2','.',',')."</td>";
             echo       "  <td>".number_format($user['retail_price'],'2','.',',')."</td>";
             echo       "  <td>".$user['unit']."</td>    ";   
-            echo         "<td> ".number_format($user['stock'])."</td>";
+            echo         "<td> ".number_format($user['stock'],'2','.',',')."</td>";
             echo        " <td>       ";                          
-            echo            " <button type = 'button'  class='btn btn-success edtitBtn'>Edit</button>";
-            echo           "  <button type = 'button' class ='btn btn-danger deleteBtn' >Delete</button>";
-            echo          "   <button type = 'button' class ='btn btn-primary addQuanBtn' >Add quantity</button>";
+            echo            " <button type = 'button'  class='btn btn-success edtitBtn'><i class='fas fa-edit'></i></button>";
+            echo           "  <button type = 'button' class ='btn btn-danger deleteBtn' ><i class='fas fa-trash-alt'></i></button>";
+            echo          "   <button type = 'button' class ='btn btn-primary addQuanBtn' ><i class='fas fa-plus'></i></button>";
                 
             echo       "  </td>";
             echo     "</tr>";
@@ -99,11 +99,11 @@
             echo       "  <td>".number_format($user['listing_price'],'2','.',',')."</td>";
             echo       "  <td>".number_format($user['retail_price'],'2','.',',')."</td>";
             echo       "  <td>".$user['unit']."</td>    ";   
-            echo         "<td> ".number_format($user['stock'])."</td>";
+            echo         "<td> ".number_format($user['stock'],'2','.',',')."</td>";
             echo        " <td>       ";                          
-            echo            " <button type = 'button'  class='btn btn-success edtitBtn'>Edit</button>";
-            echo           "  <button type = 'button' class ='btn btn-danger deleteBtn' >Delete</button>";
-            echo          "   <button type = 'button' class ='btn btn-primary addQuanBtn' >Add quantity</button>";
+            echo            " <button type = 'button'  class='btn btn-success edtitBtn'><i class='fas fa-edit'></i></button>";
+            echo           "  <button type = 'button' class ='btn btn-danger deleteBtn' ><i class='fas fa-trash-alt'></i></button>";
+            echo          "   <button type = 'button' class ='btn btn-primary addQuanBtn' ><i class='fas fa-plus'></i></button>";
                 
             echo       "  </td>";
             echo     "</tr>";
