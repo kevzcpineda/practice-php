@@ -7,6 +7,7 @@
     <script src="jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -239,14 +240,14 @@
                 <input type="text" name="retail_price" id="edit_retail_price" class="form-control">
                 
                 <label class="col-form-label" for="unit">Unit</label>
-                    <select name="" id="edit_unit" class="form-control">
+                    <select name="unit" id="edit_unit" class="form-control">
                         <option value="">Select unit</option>
-                        <option value="pcs">Pcs</option>
-                        <option value="kgs">Kgs</option>
-                        <option value="gross">Gross</option>
-                        <option value="lnFT">LnFT</option>
-                        <option value="sqFt">SqFt</option>
-                        <option value="tubes">Tubes</option>
+                        <option value="Pcs">Pcs</option>
+                        <option value="Kgs">Kgs</option>
+                        <option value="Gross">Gross</option>
+                        <option value="LnFT">LnFT</option>
+                        <option value="SqFt">SqFt</option>
+                        <option value="Tubes">Tubes</option>
                     </select>
                 
 
@@ -360,11 +361,11 @@
                         <td><?php echo number_format($user["listing_price"],'2','.',',')?></td>
                         <td><?php echo number_format($user["retail_price"],'2','.',',')?></td>
                         <td><?php echo $user["unit"]?></td>                
-                        <td><?php echo number_format($user["stock"])?></td>
+                        <td><?php echo number_format($user["stock"],'2','.',',')?></td>
                         <td>                    
-                            <button type = "button"  class="btn btn-success edtitBtn">Edit</button>
-                            <button type = "button" class ="btn btn-danger deleteBtn" >Delete</button>
-                            <button type = "button" class ="btn btn-primary addQuanBtn" >Add quantity</button>
+                            <button type = "button"  class="btn btn-success edtitBtn"><i class="fas fa-edit"></i></button>
+                            <button type = "button" class ="btn btn-danger deleteBtn" ><i class="fas fa-trash-alt"></i></button>
+                            <button type = "button" class ="btn btn-primary addQuanBtn" ><i class="fas fa-plus"></i></button>
                         </td>
                     </tr>
                 
@@ -384,6 +385,7 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    
 
     <script>
         $(document).ready(function(){

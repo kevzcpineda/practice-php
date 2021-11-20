@@ -22,9 +22,11 @@
             $id = $_POST['editId'];
             $product = $_POST['product'];            
             $category = $_POST['category'];            
+            $item_category = $_POST['item_category'];            
             $brand = $_POST['brand'];            
             $listing_price = $_POST['listing_price'];
             $retail_price = $_POST['retail_price'];
+            $unit = $_POST['unit'];
             
 
             
@@ -32,9 +34,11 @@
             $sql = "UPDATE `student` SET 
             `product`='$product',
             `category`='$category',
+            `item_category`='$item_category',
             `brand`='$brand',
             `listing_price`='$listing_price',
-            `retail_price`='$retail_price' WHERE id= $id";
+            `retail_price`='$retail_price',
+            `unit`='$unit' WHERE id= $id";
             $prepareStatement = $con->prepare($sql);
             $result = $prepareStatement->execute();
             
