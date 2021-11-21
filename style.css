@@ -10,14 +10,22 @@
     max-width: 90%;
 }
 
-.top div {
+.top .top_container {
     height: 110px;
     width: 20%;
     border: 1px solid red;
     border-radius: 15px;
 }
 
+.dashbord_content {
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+
+
 .top {
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -27,6 +35,10 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+}
+
+.right {
+    display: flex;
 }
 
 .nav .nav-item:first-child a {
@@ -40,11 +52,20 @@
 }
 
 .schart {
-    margin-top: 40px;
+    margin-top: 70px;
     width: 100%;
-    height: 300px;
+    height: 400px;
+}
+
+.schart .category {
+    width: auto;
 }
 
 .endingInventory {
     display: flex;
+}
+
+.yearpicker {
+    width: 100px;
+    text-align: center;
 }

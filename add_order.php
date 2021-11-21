@@ -143,12 +143,12 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                 return $(this).text();
             }).get();
             console.log(data);
-            var product_total = data[6];
+            var product_total = data[7];
             var total = $('#total_order').text();
             var update_total = total - product_total;
             $("#total_order").text(update_total);
             
-            var quantity = parseFloat(data[5]);
+            var quantity = parseFloat(data[6]);
             var available_stock = parseFloat($("#available_stock").text());
             var update_quantity = quantity + available_stock;
             $("#available_stock").text(update_quantity);

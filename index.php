@@ -64,7 +64,7 @@
         </div>
 
         <div class="schart">
-            <select name="" id="category">
+            <select name="" id="category" class="category form-control">
                 <?php 
                     include("mysqli.php");
                     $catSql = "SELECT * FROM category_table";

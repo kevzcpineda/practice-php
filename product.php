@@ -303,7 +303,8 @@
                 </div>
                 <div class="right">
                     <!-- <input type="text" id="search"> -->
-                    <select name="" id="filter_category">
+                    <div>
+                        <select name="" id="filter_category" class="form-control">
                         <option value="all">Select filter</option>
                         <?php 
                             include("mysqli.php");
@@ -316,7 +317,9 @@
                                 
                         <?php } ?>
                     </select>   
-                    <select name="" id="filter_item_category">
+                    </div>
+                    <div>
+                        <select name="" id="filter_item_category" class="form-control">
                         <option value="all">Select filter</option>
                         <?php 
                             include("mysqli.php");
@@ -329,7 +332,11 @@
                                 
                         <?php } ?>
                     </select>   
-                    <button type = "button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">Add product</button>
+                    </div>
+                    <div>
+                        <button type = "button" class="btn btn-success add_product_btn" data-bs-toggle="modal" data-bs-target="#addModal">Add product</button>
+                    </div>
+                    
                 </div>
                 
             </div>
