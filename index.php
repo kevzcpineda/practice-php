@@ -22,15 +22,35 @@
             <h3>Dashboard</h3>
         </div>
         <div class="top">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div class="top_container">
+                <div class="dashbord_content">
+                    <h3 id="total_products"></h3>
+                    <h5>Total Products</h5>
+                </div>
+            </div>
+            <div class="top_container">
+                <div class="dashbord_content">
+                    <h3 id="total_orders">0</h3>
+                    <h5>Total Orders</h5>
+                </div>
+            </div>
+            <div class="top_container">
+                <div class="dashbord_content">
+                    <h3 id="low_stocks">0</h3>
+                    <h5>Low Stocks</h5>
+                </div>
+            </div>
+            <div class="top_container">
+                <div class="dashbord_content">
+                    <h3 id="out_of_stocks">0</h3>
+                    <h5>Out Of Stocks</h5>
+                </div>
+            </div>
         </div>
-        <h1 id="kev"></h1>
+        
         <div class="endingInventory" >
             <!-- <input type="text" class="form-control" name="datepicker" id="datepicker"/> -->
-            <button class="btn btn-success" id="endingInventory">Get ending inventory</button>
+            <button class="btn btn-success" id="endingInventory">Get Ending Inventory</button>
         </div>
         <div class="charts">
             <input type="text" class="yearpicker form-control" id="picker"/>
@@ -80,7 +100,17 @@
 
     <script>
         $(document).ready(function(){
-            
+            $.ajax({
+                method:"POST",
+                url:"dashboard.php",
+                dataType:"JSON",
+                success: function(res){
+                    console.log(res.total_products);
+                    $("#total_products").text(res.total_products);
+                    $("#total_orders").text(res.total_orders);
+                    $("#out_of_stocks").text(res.out_of_stocks);
+                }
+            });
             // btn get ending inventory
             $("#endingInventory").click(function(){
                 $.ajax({
