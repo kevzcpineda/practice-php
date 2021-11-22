@@ -7,7 +7,7 @@
     $result = $prepareStatement->execute();
     $students = $prepareStatement->fetch();
 
-    echo number_format($students['stock'])
+    echo number_format($students['stock'],'2','.',',')
 ?>
 
 

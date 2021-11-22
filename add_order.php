@@ -19,7 +19,7 @@
     <?php include("navbar.php")?>
     </div>
     <div class="container">
-        <input type="text" id="customer_name"  placeholder="Customer name" class="form-control"><br>
+        <input type="text" id="customer_name"  placeholder="Customer name" class="form-control">
         <select name="" id="select" class="w-25">
             <option value="">Select product</option>
             <?php foreach($students as $student){?>
@@ -83,7 +83,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
             var product_id = $("select").val();
             var add_product_btn = $("#submit").val();
             var quantity = $("#quantity").val();
-            var available_stock = parseInt($("#available_stock").text());
+            var available_stock = parseFloat($("#available_stock").text());
             var total_orders = [];
             var total = 0;
             count = count+1;
