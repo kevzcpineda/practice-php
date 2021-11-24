@@ -19,7 +19,7 @@
     <?php include("navbar.php")?>
     </div>
     <div class="container">
-        <input type="text" id="customer_name"  placeholder="Customer name" class="form-control">
+        <input type="text" id="customer_name"  placeholder="Customer name" class="form-control w-25 mb-3">
         <select name="" id="select" class="w-25">
             <option value="">Select product</option>
             <?php foreach($students as $student){?>
@@ -31,7 +31,7 @@
         <input type="number" id="quantity">
         <button type="button" id="submit" class="btn btn-primary">Add product</button>
     
-        <table class="table" id="t">
+        <table class="table mt-3" id="t">
             <thead>
                 <tr>      
                     <th scope="col">Product</th>                   
