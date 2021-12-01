@@ -130,12 +130,12 @@
                     <label class="col-form-label" for="unit">Unit</label>
                     <select name="" id="unit" class="form-control">
                         <option value="">Select unit</option>
-                        <option value="pcs">Pcs</option>
-                        <option value="kgs">Kgs</option>
-                        <option value="gross">Gross</option>
-                        <option value="lnFT">LnFT</option>
-                        <option value="sqFt">SqFt</option>
-                        <option value="tubes">Tubes</option>
+                        <option value="Pcs">Pcs</option>
+                        <option value="Kgs">Kgs</option>
+                        <option value="Gross">Gross</option>
+                        <option value="InFT">LnFT</option>
+                        <option value="SqFt">SqFt</option>
+                        <option value="Tubes">Tubes</option>
                     </select>
                     <span id="cat_error"></span>  
                 </div>
