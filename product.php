@@ -396,7 +396,51 @@
 
     <script>
         $(document).ready(function(){
-            $('#table').DataTable();
+            $('#table').DataTable({
+                drawCallback: function () {
+                    // -----------delete btn-----------
+                    $('.deleteBtn').on('click',function(){
+                        
+                        $('#deleteModal').modal('show');
+                            $tr = $(this).closest('tr');
+                            var data = $tr.children("td").map(function(){
+                                return $(this).text();
+                            }).get();
+                            $('#deleteId').val(data[0]);
+                    });
+                     // ---------------edit btn--------------
+                    $('.edtitBtn').on('click',function(){
+                        
+                        $('#editModal').modal('show');
+                            $tr = $(this).closest('tr');
+
+                            var data = $tr.children("td").map(function(){
+                                return $(this).text();
+                            }).get();
+                        
+                            $("#edit_id").val(data[0]);
+                            $("#edit_product").val(data[1]);
+                            $("#edit_cat").val(data[2]);
+                            $("#edit_item_cat").val(data[3]);
+                            $("#edit_brand").val(data[4]);
+                            $("#edit_listing_price").val(data[5]);
+                            $("#edit_retail_price").val(data[6]);
+                            $("#edit_unit").val(data[7]);
+                    });
+                    // --------------add quantity------------
+                    $('.addQuanBtn').on('click',function(){
+                        
+                        $('#addQuantityModal').modal('show');
+                            $tr = $(this).closest('tr');
+
+                            var data = $tr.children("td").map(function(){
+                                return $(this).text();
+                            }).get();
+
+                            $('#quantityId').val(data[0]);
+                    });
+                }
+            });
             // -----------delete btn-----------
             $('.deleteBtn').on('click',function(){
                 
