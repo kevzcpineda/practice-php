@@ -1,7 +1,8 @@
 
 
 <?php
-    $con = mysqli_connect("localhost","root","","student_info");
+    // $con = mysqli_connect("localhost","root","","student_info");
+    include("mysqli.php");
 
     if(isset($_POST['submit'])){
         $product = trim($_POST['product']); 
