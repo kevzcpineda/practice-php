@@ -66,6 +66,8 @@
     
     $january_capital = 0;
     $january_sold = 0;
+    $january_listing_total = 0;
+    $january_retail_total = 0;
     $january_revenue = 0;
     
     foreach ($monthly_capital_records as $monthly_capital_record){
@@ -73,8 +75,12 @@
     }
     foreach ($monthly_sale_records as $monthly_sale_record){
         $january_sold = $january_sold + $monthly_sale_record['total'];
+        $january_listing_total = $monthly_sale_record['total_listing_price'] * $monthly_sale_record['quantity'];
+        $january_retail_total = $monthly_sale_record['price'] * $monthly_sale_record['quantity'];
+        $january_revenue = $january_revenue + ($january_retail_total-$january_listing_total);
     }
-    $january_revenue = $january_sold - $january_capital;
+
+    // $january_revenue = $january_sold - $january_capital;
     
     $data["january_capital"] = $january_capital;
     $data["january_sold"] = $january_sold;
@@ -92,6 +98,8 @@
     
     $feb_capital = 0;
     $feb_sold = 0;
+    $feb_listing_total = 0;
+    $feb_retail_total = 0;
     $feb_revenue = 0;
     
     foreach ($monthly_capital_records as $monthly_capital_record){
@@ -99,8 +107,11 @@
     }
     foreach ($monthly_sale_records as $monthly_sale_record){
         $feb_sold = $feb_sold + $monthly_sale_record['total'];
+        $feb_listing_total = $monthly_sale_record['total_listing_price'] * $monthly_sale_record['quantity'];
+        $feb_retail_total = $monthly_sale_record['price'] * $monthly_sale_record['quantity'];
+        $feb_revenue = $feb_revenue + ($feb_retail_total-$feb_listing_total);
     }
-    $feb_revenue = $feb_sold - $january_capital;
+    // $feb_revenue = $feb_sold - $january_capital;
     
     $data["feb_capital"] = $feb_capital;
     $data["feb_sold"] = $feb_sold;
@@ -118,6 +129,8 @@
     
     $march_capital = 0;
     $march_sold = 0;
+    $march_listing_total = 0;
+    $march_retail_total = 0;
     $march_revenue = 0;
     
     foreach ($monthly_capital_records as $monthly_capital_record){
@@ -125,8 +138,11 @@
     }
     foreach ($monthly_sale_records as $monthly_sale_record){
         $march_sold = $march_sold + $monthly_sale_record['total'];
+        $march_listing_total = $monthly_sale_record['total_listing_price'] * $monthly_sale_record['quantity'];
+        $march_retail_total = $monthly_sale_record['price'] * $monthly_sale_record['quantity'];
+        $march_revenue = $march_revenue + ($march_retail_total-$march_listing_total);
     }
-    $march_revenue = $march_sold - $march_capital;
+    // $march_revenue = $march_sold - $march_capital;
     
     $data["march_capital"] = $march_capital;
     $data["march_sold"] = $march_sold;
@@ -144,6 +160,8 @@
     
     $april_capital = 0;
     $april_sold = 0;
+    $april_listing_total = 0;
+    $april_retail_total = 0;
     $april_revenue = 0;
     
     foreach ($monthly_capital_records as $monthly_capital_record){
@@ -151,8 +169,11 @@
     }
     foreach ($monthly_sale_records as $monthly_sale_record){
         $april_sold = $april_sold + $monthly_sale_record['total'];
+        $april_listing_total = $monthly_sale_record['total_listing_price'] * $monthly_sale_record['quantity'];
+        $april_retail_total = $monthly_sale_record['price'] * $monthly_sale_record['quantity'];
+        $april_revenue = $april_revenue + ($april_retail_total-$april_listing_total);
     }
-    $april_revenue = $april_sold - $april_capital;
+    // $april_revenue = $april_sold - $april_capital;
     
     $data["april_capital"] = $april_capital;
     $data["april_sold"] = $april_sold;
@@ -170,6 +191,8 @@
     
     $may_capital = 0;
     $may_sold = 0;
+    $may_listing_total = 0;
+    $may_retail_total = 0;
     $may_revenue = 0;
     
     foreach ($monthly_capital_records as $monthly_capital_record){
@@ -177,8 +200,11 @@
     }
     foreach ($monthly_sale_records as $monthly_sale_record){
         $may_sold = $may_sold + $monthly_sale_record['total'];
+        $may_listing_total = $monthly_sale_record['total_listing_price'] * $monthly_sale_record['quantity'];
+        $may_retail_total = $monthly_sale_record['price'] * $monthly_sale_record['quantity'];
+        $may_revenue = $may_revenue + ($may_retail_total-$may_listing_total);
     }
-    $may_revenue = $may_sold - $may_capital;
+    // $may_revenue = $may_sold - $may_capital;
     
     $data["may_capital"] = $may_capital;
     $data["may_sold"] = $may_sold;
@@ -196,6 +222,8 @@
     
     $june_capital = 0;
     $june_sold = 0;
+    $june_listing_total = 0;
+    $june_retail_total = 0;
     $june_revenue = 0;
     
     foreach ($monthly_capital_records as $monthly_capital_record){
@@ -203,8 +231,11 @@
     }
     foreach ($monthly_sale_records as $monthly_sale_record){
         $june_sold = $june_sold + $monthly_sale_record['total'];
+        $june_listing_total = $monthly_sale_record['total_listing_price'] * $monthly_sale_record['quantity'];
+        $june_retail_total = $monthly_sale_record['price'] * $monthly_sale_record['quantity'];
+        $june_revenue = $june_revenue + ($june_retail_total-$june_listing_total);
     }
-    $june_revenue = $june_sold - $june_capital;
+    // $june_revenue = $june_sold - $june_capital;
     
     $data["june_capital"] = $june_capital;
     $data["june_sold"] = $june_sold;
@@ -222,6 +253,8 @@
     
     $july_capital = 0;
     $july_sold = 0;
+    $july_listing_total = 0;
+    $july_retail_total = 0;
     $july_revenue = 0;
     
     foreach ($monthly_capital_records as $monthly_capital_record){
@@ -229,8 +262,11 @@
     }
     foreach ($monthly_sale_records as $monthly_sale_record){
         $july_sold = $july_sold + $monthly_sale_record['total'];
+        $july_listing_total = $monthly_sale_record['total_listing_price'] * $monthly_sale_record['quantity'];
+        $july_retail_total = $monthly_sale_record['price'] * $monthly_sale_record['quantity'];
+        $july_revenue = $july_revenue + ($july_retail_total-$july_listing_total);
     }
-    $july_revenue = $july_sold - $july_capital;
+    // $july_revenue = $july_sold - $july_capital;
     
     $data["july_capital"] = $july_capital;
     $data["july_sold"] = $july_sold;
@@ -248,6 +284,8 @@
     
     $august_capital = 0;
     $agust_sold = 0;
+    $august_listing_total = 0;
+    $august_retail_total = 0;
     $august_revenue = 0;
     
     foreach ($monthly_capital_records as $monthly_capital_record){
@@ -255,8 +293,11 @@
     }
     foreach ($monthly_sale_records as $monthly_sale_record){
         $agust_sold = $agust_sold + $monthly_sale_record['total'];
+        $august_listing_total = $monthly_sale_record['total_listing_price'] * $monthly_sale_record['quantity'];
+        $august_retail_total = $monthly_sale_record['price'] * $monthly_sale_record['quantity'];
+        $august_revenue = $august_revenue + ($august_retail_total-$august_listing_total);
     }
-    $august_revenue = $agust_sold - $august_capital;
+    // $august_revenue = $agust_sold - $august_capital;
     
     $data["august_capital"] = $august_capital;
     $data["agust_sold"] = $agust_sold;
@@ -274,6 +315,8 @@
     
     $september_capital = 0;
     $september_sold = 0;
+    $september_listing_total = 0;
+    $september_retail_total = 0;
     $september_revenue = 0;
     
     foreach ($monthly_capital_records as $monthly_capital_record){
@@ -281,8 +324,11 @@
     }
     foreach ($monthly_sale_records as $monthly_sale_record){
         $september_sold = $september_sold + $monthly_sale_record['total'];
+        $september_listing_total = $monthly_sale_record['total_listing_price'] * $monthly_sale_record['quantity'];
+        $september_retail_total = $monthly_sale_record['price'] * $monthly_sale_record['quantity'];
+        $september_revenue = $september_revenue + ($september_retail_total-$september_listing_total);
     }
-    $september_revenue = $september_sold - $september_capital;
+    // $september_revenue = $september_sold - $september_capital;
     
     $data["september_capital"] = $september_capital;
     $data["september_sold"] = $september_sold;
@@ -300,16 +346,21 @@
     
     $october_capital = 0;
     $october_sold = 0;
+    $october_listing_total = 0;
+    $october_retail_total = 0;
     $october_revenue = 0;
-    $october_ending_inventory = 0;
+    
 
     foreach ($monthly_capital_records as $monthly_capital_record){
         $october_capital = $october_capital + $monthly_capital_record['total_listing_price'];
     }
     foreach ($monthly_sale_records as $monthly_sale_record){
         $october_sold = $october_sold + $monthly_sale_record['total'];
+        $october_listing_total = $monthly_sale_record['total_listing_price'] * $monthly_sale_record['quantity'];
+        $october_retail_total = $monthly_sale_record['price'] * $monthly_sale_record['quantity'];
+        $october_revenue = $october_revenue + ($october_retail_total-$october_listing_total);
     }
-    $october_revenue = $october_sold - $october_capital;
+    // $october_revenue = $october_sold - $october_capital;
     
     $data["october_capital"] = $october_capital;
     $data["october_sold"] = $october_sold;
@@ -327,6 +378,8 @@
     
     $november_capital = 0;
     $november_sold = 0;
+    $november_listing_total = 0;
+    $november_retail_total = 0;
     $november_revenue = 0;
     
     foreach ($monthly_capital_records as $monthly_capital_record){
@@ -334,8 +387,12 @@
     }
     foreach ($monthly_sale_records as $monthly_sale_record){
         $november_sold = $november_sold + $monthly_sale_record['total'];
+        $november_listing_total = $monthly_sale_record['total_listing_price'] * $monthly_sale_record['quantity'];
+        $november_retail_total = $monthly_sale_record['price'] * $monthly_sale_record['quantity'];
+        $november_revenue = $november_revenue + ($november_retail_total-$november_listing_total);
     }
-    $november_revenue = $november_sold - $november_capital;
+
+    // $november_revenue = $november_sold - $november_capital;
     
     $data["november_capital"] = $november_capital;
     $data["november_sold"] = $november_sold;
@@ -353,6 +410,8 @@
     
     $december_capital = 0;
     $december_sold = 0;
+    $december_listing_total = 0;
+    $december_retail_total = 0;
     $december_revenue = 0;
     
     foreach ($monthly_capital_records as $monthly_capital_record){
@@ -360,8 +419,11 @@
     }
     foreach ($monthly_sale_records as $monthly_sale_record){
         $december_sold = $december_sold + $monthly_sale_record['total'];
+        $december_listing_total = $monthly_sale_record['total_listing_price'] * $monthly_sale_record['quantity'];
+        $december_retail_total = $monthly_sale_record['price'] * $monthly_sale_record['quantity'];
+        $december_revenue = $december_revenue + ($december_retail_total-$december_listing_total);
     }
-    $december_revenue = $december_sold - $december_capital;
+    // $december_revenue = $december_sold - $december_capital;
     
     $data["december_capital"] = $december_capital;
     $data["december_sold"] = $december_sold;
