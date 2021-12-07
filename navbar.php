@@ -11,10 +11,10 @@
                 <a class="nav-link" href="sales.php">Orders</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="category.php">Product categorys</a>
+                <a class="nav-link" href="category.php">Product categories</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="item_category.php">Item categorys</a>
+                <a class="nav-link" href="item_category.php">Item categories</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="brand.php">Brands</a>
