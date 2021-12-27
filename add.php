@@ -4,7 +4,7 @@
     // $con = mysqli_connect("localhost","root","","student_info");
     include("mysqli.php");
 
-    if(isset($_POST['submit'])){
+    
         $product = trim($_POST['product']); 
         $category = trim($_POST['category']);  
         $item_category = trim($_POST['item_category']);  
@@ -12,7 +12,7 @@
         $unit = $_POST['unit'];
 
         $selectUsers = "SELECT * FROM student WHERE product='$product' AND category='$category' AND brand='$brand'";
-        $prepareStatement = mysqli_query($con,"SELECT * FROM student WHERE product='$product' AND category='$category' AND brand='$brand'");
+        $prepareStatement = mysqli_query($con,"SELECT * FROM student WHERE product='$product' AND category='$category' AND brand='$brand' AND item_category='$item_category'");
         $result=mysqli_num_rows($prepareStatement);
 
         $date = date('Y-m-d');
@@ -27,6 +27,7 @@
         $listing_error = false;
         $retail_error = false;
         $stock_error = false;
+        $unit_error = false;
         $success_error = false;
 
         $product_msg = "";
@@ -35,6 +36,7 @@
         $listing_msg = "";
         $retail_msg = "";
         $stock_msg = "";
+        $unit_msg = "";
         $already_exist = "";
         
         
@@ -82,6 +84,12 @@
                 $retail_error = true;
             }
         }
+        if(empty($unit)){
+            $unit_msg = "input unit";
+            $unit_error = true;
+        }else{
+            $unit_error = false;
+        }
 
         // if(empty($stock)){
         //     $stock_msg = "input stock";
@@ -97,7 +105,7 @@
         }
 
         
-        if(($listing_error == false) && ($product_error == false) && ($retail_error == false) && ($category_error == false) && ($success_error == false) && ($brand_error == false)){
+        if(($listing_error == false) && ($product_error == false) && ($retail_error == false) && ($category_error == false) && ($success_error == false) && ($brand_error == false) && ($unit_error == false)){
             $add_user = "INSERT INTO `student`(`id`, `product`,`category`,`item_category`,`brand`,`listing_price`,`retail_price`,`unit`,`stock`) VALUES (null,'$product','$category','$item_category','$brand','$listing_price','$retail_price','$unit','$stock')";
             $prepareStatement_user = $con->prepare($add_user);
             $user_result = $prepareStatement_user->execute();
@@ -108,7 +116,7 @@
             
         }
         
-    }
+    
     
 
 
@@ -121,6 +129,7 @@
     var listing_error ="<?php echo $listing_error?>";
     var retail_error ="<?php echo $retail_error?>";
     var stock_error ="<?php echo $stock_error?>";
+    var unit_error ="<?php echo $unit_error?>";
     var success_error = "<?php echo $success_error?>";
 
     var product_msg = "<?php echo $product_msg?>";
@@ -129,11 +138,12 @@
     var listing_msg = "<?php echo $listing_msg?>";
     var retail_msg = "<?php echo $retail_msg?>";
     var stock_msg = "<?php echo $stock_msg?>";
+    var unit_msg = "<?php echo $unit_msg?>";
     var already_exist = "<?php echo $already_exist?>";
     
     console.log(success_error);
     console.log(already_exist);
-    if(product_error || category_error || brand_error || listing_error || retail_error || stock_error || success_error){
+    if(product_error || category_error || brand_error || listing_error || retail_error || stock_error || unit_error || success_error){
         if(product_error){
         $("#product_error").text(product_msg);
         }else{
@@ -165,6 +175,11 @@
         $("#stock_error").text(stock_msg);
         }else{
             $("#stock_error").text("");
+        }
+        if(unit_error){
+        $("#unit_error").text(unit_msg);
+        }else{
+            $("#unit_error").text("");
         }
         if(success_error){
         $("#error").text(already_exist);
