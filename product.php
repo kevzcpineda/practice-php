@@ -73,7 +73,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="add.php" method="POST" id="addform">
+                
                 <div class="">
                     <label class="col-form-label">Product name:</label> 
                     <input type="text" class="form-control" name="product" id="product" placeholder="Product">
@@ -149,12 +149,12 @@
             
             </div>
             <div class="modal-footer">
-                <button type="submit" name="add"class="btn btn-primary" id="submit">Add product</button>
+                <button type="submit" name="add"class="btn btn-primary" id="add_product">Add product</button>
                 <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Close</button>
                 
                 
             </div>
-            </form>
+            
             </div>
         </div>
     </div>
@@ -487,8 +487,30 @@
                     $('#quantityId').val(data[0]);
             });
             // ----------------ADD PRODUCT BTN-------------
-            $("#addform").submit(function(event){
-                event.preventDefault();
+            // $("#addform").submit(function(event){
+            //     event.preventDefault();
+            //     var product = $("#product").val();
+            //     var category = $("#category").val();
+            //     var item_category = $("#item_category").val();
+            //     var brand = $("#brand").val();
+            //     var listing_price = $("#listing_price").val();
+            //     var retail_price = $("#retail_price").val();
+            //     var unit = $("#unit").val();
+            //     var stock = $("#stock").val();
+            //     var submit = $("#submit").val();
+            //     $("#error").load("add.php",{
+            //         product:product,
+            //         category:category,
+            //         item_category:item_category,
+            //         brand:brand,
+            //         listing_price:listing_price,
+            //         retail_price:retail_price,
+            //         unit:unit,
+            //         stock:stock,
+            //         submit:submit
+            //     });
+            // });
+            $("#add_product").click(function(){
                 var product = $("#product").val();
                 var category = $("#category").val();
                 var item_category = $("#item_category").val();
@@ -497,20 +519,28 @@
                 var retail_price = $("#retail_price").val();
                 var unit = $("#unit").val();
                 var stock = $("#stock").val();
-                var submit = $("#submit").val();
-                $("#error").load("add.php",{
-                    product:product,
-                    category:category,
-                    item_category:item_category,
-                    brand:brand,
-                    listing_price:listing_price,
-                    retail_price:retail_price,
-                    unit:unit,
-                    stock:stock,
-                    submit:submit
-                });
 
+                console.log("workingdfsdfsdfsd");
+                $.ajax({
+                    url:"add.php",
+                    method:"POST",
+                    data:{
+                        product:product,
+                        category:category,
+                        item_category:item_category,
+                        brand:brand,
+                        listing_price:listing_price,
+                        retail_price:retail_price,
+                        unit:unit,
+                        stock:stock,
+                    },
+                    success: function(res){
+                        window.location.href = "product.php";
+                        
+                    }
+                });
             });
+
 
             // -------------------FILTER PRODUCT CATEGORY---------------
             $("#filter_category").on('change',function(){
