@@ -9,6 +9,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 $id = $_GET['id'];
 $customerName = "";
 $total = "";
+$no = "000000";
+
 $order_table_sql = "SELECT * FROM order_table WHERE id='$id'";
 $order_table_result = mysqli_query($con,$order_table_sql);
 while($row = mysqli_fetch_array($order_table_result)){
@@ -40,12 +42,14 @@ $html = '
     <h5>Office Add: BLCK#5 JASMINE ST. EL CANO SUBD. MC. ARTHUR H-WAY ANGELES CITY</h5>
     <h5>Email Add: fx4cst@gmail.com</h5>
     <h5>Contact no. 09663992457 or 09218502489</h5>
+    <h5>Non VAT Reg. TIN 206-179-959-000</h5>
     
     
     <table class="ches">
         <tr>
             <td>NAME:'.$customerName.'</td>
             <td>DATE:</td>
+            <td>NO. '.$id.'</td>
         </tr>
         <tr>
             <td>ADDRESS:</td>
