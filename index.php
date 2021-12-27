@@ -117,7 +117,7 @@
                     method:"POST",
                     url:"ending_inventory.php",
                     success: function(res){
-                        alert("success");
+                        window.location.href = "index.php";
                     }
                 });
             });
