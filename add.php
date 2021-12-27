@@ -83,21 +83,21 @@
             }
         }
 
-        if(empty($stock)){
-            $stock_msg = "input stock";
-            $stock_error = true;
-        }else{
-            $stock_error = false;
-        }
+        // if(empty($stock)){
+        //     $stock_msg = "input stock";
+        //     $stock_error = true;
+        // }else{
+        //     $stock_error = false;
+        // }
         if($result > 0){
-            $already_exist = "this item is already exist";
+            $already_exist = "This item is already exist";
             $success_error = true;
         }else{
             $success_error = false;
         }
 
         
-        if(($listing_error == false) && ($product_error == false) && ($retail_error == false) && ($category_error == false) && ($stock_error == false) && ($success_error == false) && ($brand_error == false)){
+        if(($listing_error == false) && ($product_error == false) && ($retail_error == false) && ($category_error == false) && ($success_error == false) && ($brand_error == false)){
             $add_user = "INSERT INTO `student`(`id`, `product`,`category`,`item_category`,`brand`,`listing_price`,`retail_price`,`unit`,`stock`) VALUES (null,'$product','$category','$item_category','$brand','$listing_price','$retail_price','$unit','$stock')";
             $prepareStatement_user = $con->prepare($add_user);
             $user_result = $prepareStatement_user->execute();
