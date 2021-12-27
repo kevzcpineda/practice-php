@@ -50,8 +50,11 @@
             </tbody>
         </table>
         <hr>
-        <button class="btn btn-success" id="save_btn">Order</button>
-        <h5>Total: <span id="total_order"></span></h5>
+        <div class="order_and_total">
+            <button class="btn btn-success" id="save_btn">Order</button>
+            <h6 class="total_purchased">Total: <span id="total_order"></span></h6>
+        </div>
+        
     </div>
 </body>
 
