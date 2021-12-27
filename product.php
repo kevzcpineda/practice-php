@@ -16,7 +16,7 @@
     <?php
         $page = 'product';
         include("connect.php");
-        $selectUsers = "SELECT * FROM student ORDER BY id DESC";
+        $selectUsers = "SELECT * FROM student";
         $prepareStatement = $con->prepare($selectUsers);
         $result = $prepareStatement->execute();
         $users = $prepareStatement->fetchAll();
@@ -353,7 +353,7 @@
                     <th scope="col">Retail Price</th>
                     <th scope="col">Unit</th>
                     <th scope="col">Stock</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" width="15%">Action</th>
                     </tr>
                 </thead>
                 <tbody id="table_body">
