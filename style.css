@@ -69,3 +69,12 @@
     width: 100px;
     text-align: center;
 }
+
+.order_and_total {
+    display: flex;
+}
+
+.total_purchased {
+    font-size: 18px;
+    margin-left: 78%;
+}
