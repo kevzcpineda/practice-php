@@ -1,9 +1,5 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $db = "student_info";
-    $con = new mysqli($servername,$username,$password,$db);
+    include("mysqli.php");
     if(isset($_POST['product'])){
         $error_msg = "";
         $name_error = false;

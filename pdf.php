@@ -1,14 +1,11 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "student_info";
-$con = new mysqli($servername,$username,$password,$db);
+include("mysqli.php");
 require_once __DIR__ . '/vendor/autoload.php';
 
 $id = $_GET['id'];
 $customerName = "";
 $total = "";
+$date = "";
 $no = "000000";
 
 $order_table_sql = "SELECT * FROM order_table WHERE id='$id'";
@@ -16,6 +13,7 @@ $order_table_result = mysqli_query($con,$order_table_sql);
 while($row = mysqli_fetch_array($order_table_result)){
     $customerName = $row['customer_name'];
     $total = $row['total'];
+    $date = $row['date'];
 }
 
 $sql = "SELECT * FROM sale_record WHERE product_id='$id'";
@@ -47,8 +45,8 @@ $html = '
     
     <table class="ches">
         <tr>
-            <td>NAME:'.$customerName.'</td>
-            <td>DATE:</td>
+            <td>NAME: '.$customerName.'</td>
+            <td>DATE: '.$date.'</td>
             <td>NO. '.$id.'</td>
         </tr>
         <tr>
