@@ -24,10 +24,11 @@
         $product_name = $user['product'];
         $categoty = $user['category'];
         $brand = $user['brand'];
-        $total_listing_price = $user_quantity * $user['listing_price'];
+        $listing_price = $user['listing_price'];
+        $total_listing_price = $user_quantity * $listing_price;
         $date = date('Y-m-d');
 
-        $add_quantity = "INSERT INTO `add_quantity`(`id`, `product`, `category`, `brand_name`, `quantity`, `total_listing_price`, `date`) VALUES (null,'$product_name','$categoty','$brand','$user_quantity','$total_listing_price','$date')";
+        $add_quantity = "INSERT INTO `add_quantity`(`id`, `product`, `category`, `brand_name`, `quantity`,`listing_price`,`total_listing_price`, `date`) VALUES (null,'$product_name','$categoty','$brand','$user_quantity','$listing_price','$total_listing_price','$date')";
         $prepareStatement_ = $con->prepare($add_quantity);
         $result_ = $prepareStatement_->execute();
         // echo "<pre>";

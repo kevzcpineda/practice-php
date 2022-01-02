@@ -23,6 +23,7 @@
         
         $product_error = false;
         $category_error = false;
+        $item_category_error = false;
         $brand_error = false;
         $listing_error = false;
         $retail_error = false;
@@ -32,6 +33,7 @@
 
         $product_msg = "";
         $category_msg = "";
+        $item_category_msg = "";
         $brand_msg = "";
         $listing_msg = "";
         $retail_msg = "";
@@ -41,51 +43,57 @@
         
         
         if(empty($product)){
-            $product_msg = "input product";
+            $product_msg = "Input product";
             $product_error = true;
         }else{
             $product_error = false;
         }
 
         if(empty($category)){
-            $category_msg = "input category";
+            $category_msg = "Input category";
             $category_error = true;
         }else{
             $category_error = false;
         }
+        if(empty($item_category)){
+            $item_category_msg = "Input item category";
+            $item_category_error = true;
+        }else{
+            $item_category_error = false;
+        }
 
         if(empty($brand)){
-            $brand_msg = "input brand";
+            $brand_msg = "Input brand";
             $brand_error = true;
         }else{
             $brand_error = false;
         }
 
         if(empty($listing_price)){
-            $listing_msg = "input listing price";
+            $listing_msg = "Input listing price";
             $listing_error = true;
         }else{
             if(preg_match("/[0-9]+\.?[0-9]*/",$listing_price)){
                 $listing_error = false;
             }else{
-                $listing_msg = "number only";
+                $listing_msg = "Number only";
                 $listing_error = true;
                 }
         }
 
         if(empty($retail_price)){
-            $retail_msg = "input retail";
+            $retail_msg = "Input retail price";
             $retail_error = true;
         }else{
             if(preg_match("/[0-9]+\.?[0-9]*/",$retail_price)){
                 $retail_error = false;
             }else{
-                $retail_msg = "number only";
+                $retail_msg = "Number only";
                 $retail_error = true;
             }
         }
         if(empty($unit)){
-            $unit_msg = "input unit";
+            $unit_msg = "Input unit";
             $unit_error = true;
         }else{
             $unit_error = false;
@@ -110,13 +118,12 @@
             $prepareStatement_user = $con->prepare($add_user);
             $user_result = $prepareStatement_user->execute();
 
-            $add_quantity_sql = "INSERT INTO `add_quantity`(`id`,`product`,`category`,`brand_name`,`quantity`,`total_listing_price`,`date`) VALUES (null,'$product','$category','$brand','$stock','$total_listing_price','$date')";
+            $add_quantity_sql = "INSERT INTO `add_quantity`(`id`,`product`,`category`,`brand_name`,`quantity`,`listing_price`,`total_listing_price`,`date`) VALUES (null,'$product','$category','$brand','$stock','$listing_price','$total_listing_price','$date')";
             $prepareStatement = $con->prepare($add_quantity_sql);
             $quantity_result = $prepareStatement->execute();
             
         }
         
-    
     
 
 
@@ -125,6 +132,7 @@
     
     var product_error ="<?php echo $product_error?>";
     var category_error ="<?php echo $category_error?>";
+    var item_category_error ="<?php echo $item_category_error?>";
     var brand_error ="<?php echo $brand_error?>";
     var listing_error ="<?php echo $listing_error?>";
     var retail_error ="<?php echo $retail_error?>";
@@ -134,6 +142,7 @@
 
     var product_msg = "<?php echo $product_msg?>";
     var category_msg = "<?php echo $category_msg?>";
+    var item_category_msg = "<?php echo $item_category_msg?>";
     var brand_msg = "<?php echo $brand_msg?>";
     var listing_msg = "<?php echo $listing_msg?>";
     var retail_msg = "<?php echo $retail_msg?>";
@@ -143,7 +152,7 @@
     
     console.log(success_error);
     console.log(already_exist);
-    if(product_error || category_error || brand_error || listing_error || retail_error || stock_error || unit_error || success_error){
+    if(product_error || category_error || item_category_error || listing_error || retail_error || stock_error || unit_error || success_error){
         if(product_error){
         $("#product_error").text(product_msg);
         }else{
@@ -153,6 +162,11 @@
             $("#cat_error").text(category_msg);
         }else{
             $("#cat_error").text("");
+        }
+        if(item_category_error){
+            $("#item_category_error").text(item_category_msg);
+        }else{
+            $("#item_category_error").text("");
         }
         if(brand_error){
             $("#brand_error").text(brand_msg);
@@ -200,18 +214,18 @@
             $("#alert").removeClass("alert alert-primary");
         }, 5000);
     }
-    // if(success_error){
-    //     $("#product,#listing_price,#retail_price,#category,#stock").val("");
-    //     $("#alert").addClass("alert alert-success");
-    //     $("#alet_message").text("success");
-    //     $('#addModal').modal('hide');
-    //     location.reload();
+    if(success_error){
+        $("#product,#listing_price,#retail_price,#category,#stock").val("");
+        $("#alert").addClass("alert alert-success");
+        $("#alet_message").text("success");
+        $('#addModal').modal('hide');
+        location.reload();
         
-    //     setInterval(() => {
-    //         $("#alet_message").text("");
-    //         $("#alert").removeClass("alert alert-primary");
-    //     }, 5000);
-    // }
+        setInterval(() => {
+            $("#alet_message").text("");
+            $("#alert").removeClass("alert alert-primary");
+        }, 5000);
+    }
     
 
 </script>
