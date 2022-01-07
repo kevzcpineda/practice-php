@@ -2,7 +2,7 @@
 
 <?php
     // $con = mysqli_connect("localhost","root","","student_info");
-    include("mysqli.php");
+        include("mysqli.php");
 
     
         $product = trim($_POST['product']); 
@@ -115,12 +115,12 @@
         
         if(($listing_error == false) && ($product_error == false) && ($retail_error == false) && ($category_error == false) && ($success_error == false) && ($brand_error == false) && ($unit_error == false)){
             $add_user = "INSERT INTO `student`(`id`, `product`,`category`,`item_category`,`brand`,`listing_price`,`retail_price`,`unit`,`stock`) VALUES (null,'$product','$category','$item_category','$brand','$listing_price','$retail_price','$unit','$stock')";
-            $prepareStatement_user = $con->prepare($add_user);
-            $user_result = $prepareStatement_user->execute();
+            $prepareStatement_user = $con->query($add_user);
+            $product_id = $con->insert_id;
 
-            $add_quantity_sql = "INSERT INTO `add_quantity`(`id`,`product`,`category`,`brand_name`,`quantity`,`listing_price`,`total_listing_price`,`date`) VALUES (null,'$product','$category','$brand','$stock','$listing_price','$total_listing_price','$date')";
-            $prepareStatement = $con->prepare($add_quantity_sql);
-            $quantity_result = $prepareStatement->execute();
+            $add_quantity_sql = "INSERT INTO `add_quantity`(`id`,`product_id`,`product`,`category`,`brand_name`,`quantity`,`listing_price`,`total_listing_price`,`date`) VALUES (null,'$product_id','$product','$category','$brand','$stock','$listing_price','$total_listing_price','$date')";
+            $prepareStatement = $con->query($add_quantity_sql);
+            
             
         }
         

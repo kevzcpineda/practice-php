@@ -31,7 +31,7 @@
         <input type="number" id="quantity">
         <button type="button" id="submit" class="btn btn-primary">Add product</button>
     
-        <table class="table mt-3" id="t">
+        <table class="table mt-3" id="t" >
             <thead>
                 <tr>      
                     <th scope="col">Product</th>                   
@@ -53,6 +53,7 @@
         <div class="order_and_total">
             <button class="btn btn-success" id="save_btn">Order</button>
             <h6 class="total_purchased">Total: <span id="total_order"></span></h6>
+            
         </div>
         
     </div>
@@ -60,11 +61,13 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="jquery-tabledit-1.2.3/jquery.tabledit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
 <script>
     $(document).ready(function(){
+        
         var count = 0;
         $("#select").chosen();
         $("#select").on('change',function(){
@@ -81,8 +84,9 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
         
         });
 
+
         $("#submit").click(function(){
-            
+        
             var product_id = $("select").val();
             var add_product_btn = $("#submit").val();
             var quantity = $("#quantity").val();
@@ -111,7 +115,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                 success:function(res){
                     if(quantity>0 && quantity<=available_stock){
                         // display table data
-                        $("#tbody").append('<tr><td class="product">'+res.product+'</td><td class="category">'+res.category+'</td><td class="item_category">'+res.item_category+'</td><td class="brand">'+res.brand+'</td><td class="listing_price">'+res.listing_price+'</td><td class="retail_price">'+res.retail_price+'</td><td class="quantity">'+res.quantity+'</td><td class="total">'+res.total+'</td><td class="unit">'+res.unit+'</td><td><button type="button"class="btn btn-danger delete" data-row="row'+count+'" name="remove'+count+'">Delete</button></td></tr>');
+                        $("#tbody").append('<tr row_id="'+product_id+'"><td class="product">'+res.product+'</td><td class="category">'+res.category+'</td><td class="item_category">'+res.item_category+'</td><td class="brand">'+res.brand+'</td><td class="listing_price">'+res.listing_price+'</td><td><div class="retail_price row_data" edit_type="click" col_name="retail_price">'+res.retail_price+'</div></td><td class="quantity">'+res.quantity+'</td><td class="total">'+res.total+'</td><td class="unit">'+res.unit+'</td><td><button type="button"class="btn btn-success edit" data-row="row'+count+'" name="edit'+count+'">Edit</button></td> <td><button type="button" class="btn btn-primary save_edit" row_id="'+product_id+'" name="edit'+count+'">Save</button></td><td><button type="button" class="btn btn-secondary cancel_edit" row_id="'+product_id+'" name="edit'+count+'">Cancel</button></td><td><button type="button"class="btn btn-danger delete" data-row="row'+count+'" name="remove'+count+'">Delete</button></td></tr>');
                         // reset quantity value
                         $("#quantity").val("");
                         //display new available stock
@@ -128,6 +132,10 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                         //display total order
                         $("#total_order").text(total);
                         console.log($("#total_order").text());
+
+                        $(document).find('.save_edit').hide();
+                        $(document).find('.cancel_edit').hide();
+                        
                     }else{
                         alert("error");
                     }
@@ -138,6 +146,112 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                 }
             });
         });   
+
+        // $('#editTable').Tabledit({
+        //     url: 'example.php',
+        //     columns: {
+        //         identifier: [0, 'id'],   
+        //         editable: [[1, 'col1']]
+
+        //     },
+        // });
+        
+        $(document).on('click','.edit', function(event){
+            event.preventDefault();
+            var tbl_row = $(this).closest('tr');
+            // var data = $tr.children("td").map(function(){
+            //     return $(this).text();
+            // }).get();
+
+            var row_id = tbl_row.attr("row_id");
+
+            tbl_row.find('.save_edit').show();
+            tbl_row.find('.cancel_edit').show();
+
+            tbl_row.find('.edit').hide();
+            
+            tbl_row.find('.row_data')
+            .attr('contenteditable','true')
+            .attr('edit_type','button')
+            .addClass('bg-warning')
+            .css('padding','3px')
+
+            tbl_row.find('.row_data').each(function(index,val){
+                $(this).attr('original_entry',$(this).html());
+            });
+            // tbl_row.find('.row_data').attr('original_entry',$(this).html());
+
+            console.log(row_id);
+        });
+
+        $(document).on('click','.cancel_edit', function(event){
+            event.preventDefault();
+
+            var tbl_row = $(this).closest('tr');
+            var row_id = tbl_row.attr("row_id");
+
+            tbl_row.find('.save_edit').hide();
+            tbl_row.find('.cancel_edit').hide();
+
+            tbl_row.find('.edit').show();
+
+            tbl_row.find('.row_data')
+            .attr('edit_type','click')
+            .removeAttr('contenteditable')
+            .removeClass('bg-warning')
+            .css('padding','')
+
+            tbl_row.find('.row_data').each(function(index, val){
+                $(this).html($(this).attr('original_entry'));
+            });
+            // tbl_row.find('.row_data').$(this).html($(this).attr('original_entry'));
+        });
+        
+        $(document).on('click','.save_edit', function(event){
+            event.preventDefault();
+            var tbl_row = $(this).closest('tr');
+            var data = tbl_row.children("td").map(function(){
+                return $(this).text();
+            }).get();
+            
+            var row_id = tbl_row.attr("row_id");
+            var col = tbl_row.attr("col_name");
+
+            tbl_row.find('.save_edit').hide();
+            tbl_row.find('.cancel_edit').hide();
+
+            tbl_row.find('.edit').show();
+
+            tbl_row.find('.row_data')
+            .attr('edit_type','click')
+            .removeAttr('contenteditable')
+            .removeClass('bg-warning')
+            .css('padding','')
+
+            // tbl_row.find('.row_data').each(function(index, val){
+            //     var col_name = $(this).attr('col_name');
+            //     var col_val = $(this).html;
+            //     console.log(col_name);
+            //     console.log(row_id);
+            // });
+    
+            var price = parseFloat(data[5]);
+            var qty = parseFloat(data[6]);
+            var total = data[7];
+            var total_order = $('#total_order').text();
+            console.log(price);
+            console.log(qty);
+            console.log(total);
+            console.log(total_order);
+            var new_total_order = total_order - total;
+            console.log(new_total_order);
+            var new_total = price * qty;
+            var new_total_order = new_total_order + new_total;
+            tbl_row.find('.total').text(new_total.toFixed(2));
+            console.log(new_total_order);
+            $("#total_order").text(new_total_order.toFixed(2));
+        });
+        
 
         $(document).on('click','.delete', function(){
             $tr = $(this).closest('tr');
@@ -157,6 +271,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
             $("#available_stock").text(update_quantity);
             $(this).closest('tr').remove();
         }); 
+
 
         $("#save_btn").click(function(){
             var total_order = $("#total_order").text();
@@ -187,6 +302,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
             $('.listing_price').each(function(){
                 listing_price.push($(this).text());
             });
+            
             $('.retail_price').each(function(){
                 retail_price.push($(this).text());
             });
@@ -204,6 +320,9 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                 alert("input customer name");
             }else{
                 if(count>0){
+                    console.log(listing_price);
+                    console.log(retail_price);
+                    console.log(item_category);
                     $.ajax({
                     url:"insert_order.php",
                     method:"POST",
