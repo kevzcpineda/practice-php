@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index</title>
-    <script src="jquery-3.5.1.min.js"></script>
+    <!-- <script src="jquery-3.5.1.min.js"></script> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
@@ -16,7 +16,7 @@
     <?php
         $page = 'product';
         include("connect.php");
-        $selectUsers = "SELECT * FROM student";
+        $selectUsers = "SELECT * FROM student ORDER BY id DESC";
         $prepareStatement = $con->prepare($selectUsers);
         $result = $prepareStatement->execute();
         $users = $prepareStatement->fetchAll();
@@ -357,7 +357,7 @@
                 <tbody id="table_body">
                 <?php 
                 foreach ($users as $user){?>
-                    <tr>
+                    <tr class="">
                         <td><?php echo $user["id"]?></td>
                         <td><?php echo $user["product"]?></td>                
                         <td><?php echo $user["category"]?></td>                
@@ -394,6 +394,8 @@
 
     <script>
         $(document).ready(function(){
+            $.fn.dataTable.defaults.aaSorting = [[0,'desc']];
+
             $('#table').DataTable({
                 drawCallback: function () {
                     // -----------delete btn-----------
@@ -598,6 +600,8 @@
                 });
                     
             });
+
+            
             //search product
             // $("#search").keyup(function(){
             //     var txt = $(this).val();
