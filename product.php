@@ -136,6 +136,8 @@
                         <option value="InFT">LnFT</option>
                         <option value="SqFt">SqFt</option>
                         <option value="Tubes">Tubes</option>
+                        <option value="Boxes">Boxes</option>
+                        <option value="Roll">Roll</option>
                     </select>
                     <span id="unit_error"></span>  
                 </div>
@@ -246,8 +248,8 @@
                         <option value="LnFT">LnFT</option>
                         <option value="SqFt">SqFt</option>
                         <option value="Tubes">Tubes</option>
-                        <option value="Tubes">Boxes</option>
-                        <option value="Tubes">Roll</option>
+                        <option value="Boxes">Boxes</option>
+                        <option value="Roll">Roll</option>
                     </select>
                 
 
