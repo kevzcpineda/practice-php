@@ -27,6 +27,7 @@
                 $selectUsers = "SELECT * FROM student WHERE product='$products'";
                 $users = $con->query($selectUsers);
                 $row = $users->fetch_assoc();
+                $product_id = $row['id'];
                 $sub = $row['stock'] - $quantity[$index];
 
                 $update_product = "UPDATE `student` SET `stock` = '$sub' WHERE product='$products'";
@@ -41,7 +42,7 @@
                 $new_total = $total[$index];
                 $new_unit = $unit[$index];
 
-                $add_record = "INSERT INTO `sale_record`(`id`,`product_id`,`product_name`,`brand`,`category`,`item_category`,`price`,`quantity`,`total_listing_price`,`total`,`date`,`unit`) VALUES (null,'$order_id ','$products','$new_brand','$new_category','$new_item_category','$new_retail_price','$new_quantity','$new_listing_price','$new_total','$date','$new_unit')";
+                $add_record = "INSERT INTO `sale_record`(`id`,`product_id`,`productID`,`product_name`,`brand`,`category`,`item_category`,`price`,`quantity`,`total_listing_price`,`total`,`date`,`unit`) VALUES (null,'$order_id ','$product_id','$products','$new_brand','$new_category','$new_item_category','$new_retail_price','$new_quantity','$new_listing_price','$new_total','$date','$new_unit')";
                 $prepareStatements = $con->query($add_record);
                 
                 
