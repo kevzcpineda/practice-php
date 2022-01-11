@@ -90,7 +90,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
             var product_id = $("select").val();
             var add_product_btn = $("#submit").val();
             var quantity = $("#quantity").val();
-            var available_stock = parseFloat($("#available_stock").text());
+            var available_stock = $("#available_stock").text();
             var total_orders = [];
             var total = 0;
             count = count+1;
@@ -103,7 +103,8 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
             // }else{
             //     console.log("cant order");
             // }
-            console.log(total_orders);
+            // console.log(total_orders);
+            if(parseFloat(quantity)>0 && parseFloat(quantity)<=parseFloat(available_stock)){
             $.ajax({
                 type:"POST",
                 url:"add_product_table.php",
@@ -113,7 +114,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                 },
                 dataType:"JSON",
                 success:function(res){
-                    if(quantity>0 && quantity<=available_stock){
+                    
                         // display table data
                         $("#tbody").append('<tr row_id="'+product_id+'"><td class="product">'+res.product+'</td><td class="category">'+res.category+'</td><td class="item_category">'+res.item_category+'</td><td class="brand">'+res.brand+'</td><td class="listing_price">'+res.listing_price+'</td><td><div class="retail_price row_data" edit_type="click" col_name="retail_price">'+res.retail_price+'</div></td><td class="quantity">'+res.quantity+'</td><td class="total">'+res.total+'</td><td class="unit">'+res.unit+'</td><td><button type="button"class="btn btn-success edit" data-row="row'+count+'" name="edit'+count+'">Edit</button></td> <td><button type="button" class="btn btn-primary save_edit" row_id="'+product_id+'" name="edit'+count+'">Save</button></td><td><button type="button" class="btn btn-secondary cancel_edit" row_id="'+product_id+'" name="edit'+count+'">Cancel</button></td><td><button type="button"class="btn btn-danger delete" data-row="row'+count+'" name="remove'+count+'">Delete</button></td></tr>');
                         // reset quantity value
@@ -131,20 +132,21 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
                         }
                         //display total order
                         $("#total_order").text(total);
-                        console.log($("#total_order").text());
+                        // console.log($("#total_order").text());
 
                         $(document).find('.save_edit').hide();
                         $(document).find('.cancel_edit').hide();
                         
-                    }else{
-                        alert("error");
-                    }
+                    
                     
                 },
                 error:function(data, textStatus,errorThrown){
                     console.log(data.error);
                 }
             });
+            }else{
+                alert("error");
+            }
         });   
 
         // $('#editTable').Tabledit({
